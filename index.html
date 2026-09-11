@@ -1275,8 +1275,6 @@ footer{
 <body>
     <audio id="bgMusic" src="ultah/sertamulia.mp3" preload="auto"></audio>
 
-
-
 <!-- =====================================================
      LATAR
 ===================================================== -->
@@ -3487,6 +3485,31 @@ for(
 
 }
 
+</script>
+
+
+<script>
+/* Local MP3 — GitHub Pages */
+(() => {
+  const music = document.getElementById('bgMusic');
+  if (!music) return;
+
+  // Keep volume controlled by the existing page controls when possible.
+  music.loop = true;
+  music.volume = 0.8;
+
+  // Expose simple helpers for the page and avoid autoplay restrictions:
+  // playback starts only after the user's envelope/open interaction.
+  window.playLocalBirthdayMusic = () => music.play().catch(() => {});
+  window.pauseLocalBirthdayMusic = () => music.pause();
+
+  document.addEventListener('click', (event) => {
+    const target = event.target.closest('button, .envelope, .open-envelope, [role="button"]');
+    if (target) {
+      setTimeout(() => music.play().catch(() => {}), 150);
+    }
+  }, { passive: true });
+})();
 </script>
 
 </body>
