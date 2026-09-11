@@ -1,0 +1,3493 @@
+<!--
+  GitHub Pages-ready birthday website
+  Local assets:
+    ultah/poto1.jpg
+    ultah/poto2.jpg
+    ultah/poto3.jpg
+    ultah/poto4.jpg
+    ultah/sertamulia.mp3
+
+  Put this index.html in the repository root.
+-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Untuk Ratu Hatiku — Khanza Elma Mazaya 💗👑</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Manrope',sans-serif;
+    color:#4d3040;
+    overflow-x:hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.9),transparent 25%),
+        radial-gradient(circle at 80% 30%,rgba(255,190,220,.45),transparent 30%),
+        linear-gradient(135deg,#fff0f7,#ffdce9,#ffeef5);
+}
+
+body.modal-open{
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background-glow{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-3;
+    overflow:hidden;
+}
+
+.glow{
+    position:absolute;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.45;
+}
+
+.glow.one{
+    background:#ff9fc5;
+    top:-120px;
+    left:-100px;
+}
+
+.glow.two{
+    background:#ffd0e4;
+    right:-100px;
+    top:35%;
+}
+
+.glow.three{
+    background:#f9a8d4;
+    bottom:-150px;
+    left:30%;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+#floating-hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.float-heart{
+    position:absolute;
+    bottom:-50px;
+    animation:floatUp linear forwards;
+    opacity:.7;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(0) rotate(0deg) scale(.8);
+        opacity:0;
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    100%{
+        transform:translateY(-110vh) rotate(360deg) scale(1.2);
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   PEMBUKAAN
+========================================================= */
+
+#opening{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(circle at center,#ffd7e8,#ffb9d5,#f48fb1);
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#opening.hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.opening-content{
+    text-align:center;
+    padding:25px;
+}
+
+.opening-small{
+    font-size:13px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:white;
+    margin-bottom:25px;
+    opacity:.9;
+}
+
+.envelope{
+    width:230px;
+    height:155px;
+    position:relative;
+    margin:0 auto 30px;
+    cursor:pointer;
+    filter:drop-shadow(0 25px 30px rgba(120,30,70,.2));
+}
+
+.envelope-body{
+    position:absolute;
+    inset:0;
+    background:#fff5f8;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.envelope-body:before{
+    content:"";
+    position:absolute;
+    width:165px;
+    height:165px;
+    background:#ffe2ec;
+    transform:rotate(45deg);
+    left:33px;
+    top:58px;
+}
+
+.envelope-flap{
+    position:absolute;
+    width:0;
+    height:0;
+
+    border-left:115px solid transparent;
+    border-right:115px solid transparent;
+    border-top:85px solid #ffc1d8;
+
+    top:0;
+    left:0;
+
+    transform-origin:top;
+    transition:transform .8s cubic-bezier(.68,-.55,.27,1.55);
+    z-index:4;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.envelope-letter{
+    position:absolute;
+    background:white;
+    width:170px;
+    height:115px;
+    left:30px;
+    top:25px;
+    border-radius:8px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-family:'DM Serif Display',serif;
+    font-size:23px;
+    color:#e66d9b;
+
+    transition:
+        transform .9s ease,
+        top .9s ease;
+
+    z-index:2;
+}
+
+.envelope.open .envelope-letter{
+    top:-70px;
+    transform:rotate(-3deg);
+}
+
+.open-button{
+    border:none;
+    padding:14px 28px;
+    border-radius:100px;
+
+    background:white;
+    color:#df5d8e;
+
+    font-weight:800;
+    cursor:pointer;
+
+    box-shadow:0 12px 30px rgba(150,40,80,.2);
+    transition:.3s;
+}
+
+.open-button:hover{
+    transform:translateY(-3px) scale(1.03);
+}
+
+
+/* =========================================================
+   MUSIC PLAYER
+========================================================= */
+
+.music-player{
+    position:fixed;
+    right:20px;
+    top:20px;
+    z-index:100;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    background:rgba(255,255,255,.78);
+    backdrop-filter:blur(15px);
+
+    padding:9px 12px;
+    border-radius:100px;
+
+    box-shadow:0 10px 30px rgba(100,30,60,.12);
+
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.music-button{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+
+    background:#ed709d;
+    color:white;
+
+    cursor:pointer;
+    font-size:15px;
+
+    transition:.25s;
+}
+
+.music-button:hover{
+    transform:scale(1.08);
+}
+
+.music-info{
+    font-size:11px;
+    line-height:1.3;
+}
+
+.music-title{
+    font-weight:800;
+    color:#744052;
+}
+
+.music-status{
+    color:#b17a8f;
+}
+
+.volume{
+    width:65px;
+    accent-color:#ed709d;
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+section{
+    position:relative;
+    z-index:2;
+    padding:110px 20px;
+}
+
+.container{
+    width:min(1100px,100%);
+    margin:auto;
+}
+
+.eyebrow{
+    text-align:center;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:12px;
+    color:#d86a96;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.section-title{
+    text-align:center;
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(40px,6vw,70px);
+    color:#71384e;
+    line-height:1;
+    margin-bottom:20px;
+}
+
+.section-description{
+    max-width:620px;
+    margin:auto;
+    text-align:center;
+    line-height:1.8;
+    color:#80596a;
+}
+
+
+/* =========================================================
+   ORNAMEN BUNGA
+========================================================= */
+
+.flower-decoration{
+    text-align:center;
+    font-size:24px;
+    letter-spacing:7px;
+    margin:15px 0 25px;
+    opacity:.9;
+}
+
+.flower-line{
+    text-align:center;
+    color:#df7099;
+    font-size:18px;
+    letter-spacing:8px;
+    margin:15px 0;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+    padding-top:120px;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.hero-crown{
+    font-size:45px;
+    margin-bottom:10px;
+    animation:softFloat 3s ease-in-out infinite;
+}
+
+@keyframes softFloat{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-7px);
+    }
+
+}
+
+.hero-badge{
+    display:inline-flex;
+    padding:8px 15px;
+    border-radius:100px;
+
+    background:rgba(255,255,255,.7);
+    color:#d65f8c;
+
+    font-size:12px;
+    font-weight:800;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(100,30,60,.08);
+}
+
+.hero h1{
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(60px,11vw,125px);
+    line-height:.88;
+
+    color:#71384e;
+
+    margin-bottom:30px;
+}
+
+.hero h1 span{
+    display:block;
+    color:#e96f9f;
+}
+
+.hero-name{
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(25px,4vw,42px);
+    color:#a34c70;
+    margin-top:-10px;
+    margin-bottom:25px;
+}
+
+.hero-subtitle{
+    max-width:650px;
+    margin:auto;
+
+    font-size:16px;
+    line-height:1.9;
+    color:#80596a;
+}
+
+.scroll-hint{
+    margin-top:55px;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#c27b96;
+
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(8px);
+    }
+}
+
+
+/* =========================================================
+   MAIN PHOTO
+========================================================= */
+
+.photo-section{
+    padding-top:50px;
+}
+
+.main-photo{
+    width:min(760px,100%);
+    margin:50px auto 0;
+
+    padding:13px;
+
+    background:white;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 30px 80px rgba(110,40,70,.15),
+        0 5px 20px rgba(110,40,70,.08);
+
+    transform:rotate(-1deg);
+
+    position:relative;
+}
+
+.main-photo:before,
+.main-photo:after{
+    position:absolute;
+    font-size:35px;
+    z-index:3;
+}
+
+.main-photo:before{
+    content:"🌷";
+    left:-25px;
+    top:-25px;
+}
+
+.main-photo:after{
+    content:"🌸";
+    right:-25px;
+    bottom:-25px;
+}
+
+.main-photo img{
+    display:block;
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+
+/* =========================================================
+   LOVE LETTER
+========================================================= */
+
+.letter-wrap{
+    max-width:800px;
+    margin:60px auto 0;
+}
+
+.letter{
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(15px);
+
+    padding:55px;
+
+    border-radius:20px;
+
+    box-shadow:0 25px 70px rgba(100,30,60,.1);
+
+    border:1px solid rgba(255,255,255,.8);
+
+    position:relative;
+}
+
+.letter:before{
+    content:"🌹";
+    position:absolute;
+    left:22px;
+    top:18px;
+    font-size:25px;
+}
+
+.letter:after{
+    content:"🌷";
+    position:absolute;
+    right:22px;
+    bottom:18px;
+    font-size:25px;
+}
+
+.letter p{
+    font-family:'DM Serif Display',serif;
+    font-size:22px;
+    line-height:1.8;
+    color:#684052;
+    margin-bottom:20px;
+}
+
+.signature{
+    margin-top:30px;
+    text-align:right;
+    font-family:'DM Serif Display',serif;
+    color:#df6795;
+    font-size:25px;
+}
+
+
+/* =========================================================
+   POLAROIDS
+========================================================= */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+
+    margin-top:60px;
+}
+
+.polaroid{
+    background:white;
+    padding:12px 12px 25px;
+
+    box-shadow:0 20px 45px rgba(100,30,60,.12);
+
+    transition:.4s;
+
+    position:relative;
+}
+
+.polaroid:after{
+    content:"♡";
+    position:absolute;
+    right:12px;
+    top:8px;
+    font-size:20px;
+    color:#e96f9f;
+}
+
+.polaroid:nth-child(1){
+    transform:rotate(-4deg);
+}
+
+.polaroid:nth-child(2){
+    transform:rotate(2deg);
+}
+
+.polaroid:nth-child(3){
+    transform:rotate(-2deg);
+}
+
+.polaroid:hover{
+    transform:rotate(0) translateY(-10px) scale(1.03);
+}
+
+.polaroid img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+}
+
+.polaroid p{
+    text-align:center;
+    margin-top:15px;
+    font-family:'DM Serif Display',serif;
+    font-size:20px;
+    color:#714054;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-top:60px;
+}
+
+.card{
+    background:rgba(255,255,255,.7);
+    padding:35px 25px;
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 20px 50px rgba(100,30,60,.08);
+
+    transition:.3s;
+
+    border:1px solid rgba(255,255,255,.8);
+}
+
+.card:hover{
+    transform:translateY(-7px);
+}
+
+.card-icon{
+    font-size:35px;
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-family:'DM Serif Display',serif;
+    font-size:25px;
+    margin-bottom:10px;
+    color:#71384e;
+}
+
+.card p{
+    font-size:14px;
+    line-height:1.7;
+    color:#80596a;
+}
+
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.timeline{
+    max-width:800px;
+    margin:70px auto 0;
+    position:relative;
+}
+
+.timeline:before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:#f1aac4;
+    transform:translateX(-50%);
+}
+
+.timeline-item{
+    width:50%;
+    padding:20px 40px;
+    position:relative;
+}
+
+.timeline-item:nth-child(odd){
+    text-align:right;
+}
+
+.timeline-item:nth-child(even){
+    margin-left:50%;
+}
+
+.timeline-dot{
+    position:absolute;
+
+    width:15px;
+    height:15px;
+
+    background:#e96f9f;
+    border:4px solid #ffe8f0;
+
+    border-radius:50%;
+
+    top:27px;
+}
+
+.timeline-item:nth-child(odd) .timeline-dot{
+    right:-7px;
+}
+
+.timeline-item:nth-child(even) .timeline-dot{
+    left:-7px;
+}
+
+.timeline-date{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:#d66a94;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.timeline-item h3{
+    font-family:'DM Serif Display',serif;
+    font-size:27px;
+    color:#71384e;
+    margin-bottom:7px;
+}
+
+.timeline-item p{
+    font-size:14px;
+    line-height:1.7;
+    color:#80596a;
+}
+
+
+/* =========================================================
+   FINAL SURPRISE
+========================================================= */
+
+.final-section{
+    min-height:85vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+}
+
+.final-card{
+    max-width:750px;
+    padding:60px 30px;
+}
+
+.final-card .big-heart{
+    font-size:75px;
+    animation:heartbeat 1.4s infinite;
+    margin-bottom:25px;
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform:scale(1);
+    }
+
+    20%{
+        transform:scale(1.12);
+    }
+
+    40%{
+        transform:scale(1);
+    }
+
+    60%{
+        transform:scale(1.08);
+    }
+}
+
+.final-card h2{
+    font-family:'DM Serif Display',serif;
+    font-size:clamp(45px,7vw,80px);
+    color:#71384e;
+    margin-bottom:25px;
+}
+
+.final-card p{
+    line-height:1.9;
+    color:#80596a;
+    max-width:550px;
+    margin:auto auto 35px;
+}
+
+.surprise-button{
+    border:none;
+
+    background:#e96f9f;
+    color:white;
+
+    padding:16px 30px;
+
+    border-radius:100px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:0 15px 35px rgba(210,80,130,.25);
+
+    transition:.3s;
+}
+
+.surprise-button:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(80,25,50,.7);
+    backdrop-filter:blur(12px);
+
+    z-index:500;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.5s;
+
+    overflow-y:auto;
+    -webkit-overflow-scrolling:touch;
+
+    overscroll-behavior:contain;
+}
+
+.modal.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.modal-box{
+    width:min(620px,100%);
+
+    background:
+        linear-gradient(145deg,#fff8fb,#ffe5ef);
+
+    padding:55px 35px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:0 30px 100px rgba(30,10,20,.3);
+
+    transform:scale(.8) translateY(30px);
+
+    transition:.5s;
+
+    max-height:calc(100vh - 40px);
+    overflow-y:auto;
+
+    -webkit-overflow-scrolling:touch;
+
+    overscroll-behavior:contain;
+
+    scrollbar-width:thin;
+    scrollbar-color:#e9a0bd transparent;
+
+    position:relative;
+}
+
+.modal-box::-webkit-scrollbar{
+    width:6px;
+}
+
+.modal-box::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.modal-box::-webkit-scrollbar-thumb{
+    background:#e9a0bd;
+    border-radius:20px;
+}
+
+.modal.show .modal-box{
+    transform:scale(1) translateY(0);
+}
+
+.modal-heart{
+    font-size:65px;
+    margin-bottom:10px;
+}
+
+.modal-flowers{
+    font-size:22px;
+    letter-spacing:7px;
+    margin-bottom:20px;
+}
+
+.modal h2{
+    font-family:'DM Serif Display',serif;
+    font-size:50px;
+    color:#71384e;
+    margin-bottom:20px;
+}
+
+.modal p{
+    line-height:1.9;
+    color:#80596a;
+}
+
+.modal strong{
+    color:#d65f8c;
+}
+
+.modal-poem{
+    font-family:'DM Serif Display',serif;
+    font-size:19px;
+    color:#8b5068;
+    line-height:1.9;
+}
+
+.modal-name{
+    font-family:'DM Serif Display',serif;
+    font-size:27px;
+    color:#c04f7e;
+    margin-top:20px;
+}
+
+.modal-signature{
+    margin-top:30px;
+    font-family:'DM Serif Display',serif;
+    font-size:28px;
+    color:#c45280;
+}
+
+.modal-signature small{
+    display:block;
+    font-family:'Manrope',sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#a16b81;
+    margin-bottom:6px;
+}
+
+.modal-ornament{
+    margin-top:20px;
+    font-size:23px;
+    letter-spacing:8px;
+}
+
+.close-modal{
+    margin-top:30px;
+
+    padding:12px 25px;
+
+    border:1px solid #e96f9f;
+
+    background:transparent;
+
+    color:#df6795;
+
+    border-radius:100px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.close-modal:hover{
+    background:#e96f9f;
+    color:white;
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+.confetti{
+    position:fixed;
+
+    width:8px;
+    height:14px;
+
+    top:-20px;
+
+    z-index:800;
+
+    pointer-events:none;
+
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   HEART BURST
+========================================================= */
+
+.burst-heart{
+    position:fixed;
+    z-index:900;
+    pointer-events:none;
+
+    font-size:22px;
+
+    animation:burst 1.8s ease-out forwards;
+}
+
+@keyframes burst{
+
+    0%{
+        transform:translate(0,0) scale(.5);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            rotate(360deg)
+            scale(1.5);
+
+        opacity:0;
+    }
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    text-align:center;
+    padding:40px 20px 70px;
+
+    font-size:12px;
+    color:#b47b91;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+    .music-player{
+        right:10px;
+        top:10px;
+    }
+
+    .music-info,
+    .volume{
+        display:none;
+    }
+
+    section{
+        padding:80px 18px;
+    }
+
+    .hero{
+        padding-top:100px;
+    }
+
+    .hero h1{
+        font-size:clamp(55px,17vw,90px);
+    }
+
+    .hero-subtitle{
+        font-size:14px;
+    }
+
+    .hero-name{
+        font-size:27px;
+    }
+
+    .letter{
+        padding:35px 23px;
+    }
+
+    .letter p{
+        font-size:18px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+        gap:40px;
+        max-width:400px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .timeline:before{
+        left:10px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even){
+        width:100%;
+        margin-left:0;
+        padding-left:40px;
+        padding-right:5px;
+        text-align:left;
+    }
+
+    .timeline-item:nth-child(odd){
+        text-align:left;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot{
+        left:3px;
+        right:auto;
+    }
+
+    .modal{
+        align-items:flex-start;
+        padding:20px;
+    }
+
+    .modal-box{
+        padding:40px 22px;
+        max-height:calc(100vh - 40px);
+        margin:auto 0;
+    }
+
+    .modal h2{
+        font-size:40px;
+    }
+
+    .modal p{
+        font-size:14px;
+        line-height:1.85;
+    }
+
+    .modal-poem{
+        font-size:17px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+    <audio id="bgMusic" src="ultah/sertamulia.mp3" preload="auto"></audio>
+
+
+
+<!-- =====================================================
+     LATAR
+===================================================== -->
+
+<div class="background-glow">
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
+
+</div>
+
+<div id="floating-hearts"></div>
+
+
+<!-- =====================================================
+     PEMUTAR MUSIK
+===================================================== -->
+
+<div class="music-player">
+
+    <button
+        id="musicButton"
+        class="music-button"
+        aria-label="Putar musik">
+
+        ▶
+
+    </button>
+
+    <div class="music-info">
+
+        <div class="music-title">
+            Sebuah Lagu Kecil Untukmu 🌷
+        </div>
+
+        <div
+            id="musicStatus"
+            class="music-status">
+
+            Musik belum diputar
+
+        </div>
+
+    </div>
+
+    <input
+        id="volumeControl"
+        class="volume"
+        type="range"
+        min="0"
+        max="1"
+        step=".01"
+        value=".25">
+
+</div>
+
+
+<!-- =====================================================
+     PEMBUKAAN
+===================================================== -->
+
+<div id="opening">
+
+    <div class="opening-content">
+
+        <div class="opening-small">
+
+            🌸 ada sesuatu yang indah menunggumu... 🌸
+
+        </div>
+
+
+        <div
+            id="envelope"
+            class="envelope">
+
+            <div class="envelope-body"></div>
+
+            <div class="envelope-letter">
+                Untuk Ratu Hatiku 👑
+            </div>
+
+            <div class="envelope-flap"></div>
+
+        </div>
+
+
+        <button
+            id="openButton"
+            class="open-button">
+
+            Buka surat kecil ini 💌
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-crown">
+            👑
+        </div>
+
+        <div class="hero-badge">
+
+            ✦ 13 September 2026 ✦
+
+        </div>
+
+
+        <h1>
+
+            Selamat
+
+            <span>
+                Ulang Tahun
+            </span>
+
+        </h1>
+
+
+        <div class="hero-name">
+
+            Khanza Elma Mazaya 🌷
+
+        </div>
+
+
+        <div class="flower-decoration">
+
+            🌸 🌷 🌹 💐 🌷 🌸
+
+        </div>
+
+
+        <p class="hero-subtitle">
+
+            Untuk seorang perempuan yang begitu istimewa,
+            untuk seseorang yang kehadirannya mampu membuat
+            hari-hari biasa terasa lebih indah,
+            lebih hangat, dan jauh lebih berarti.
+
+            <br><br>
+
+            Hari ini adalah hari milikmu,
+            Khanza.
+
+            Hari ketika aku ingin dunia berhenti sebentar
+            hanya untuk merayakan seorang perempuan
+            yang begitu berarti di hidupku. 💗👑
+
+        </p>
+
+
+        <div class="scroll-hint">
+
+            ↓ masih banyak yang ingin kusampaikan 🌷
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOTO UTAMA
+===================================================== -->
+
+<section class="photo-section">
+
+    <div class="container">
+
+        <div class="eyebrow">
+
+            🌷 sebuah kenangan kecil 🌷
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Salah satu pemandangan favoritku
+
+        </h2>
+
+
+        <div class="flower-line">
+
+            ❀ ♡ ❀
+
+        </div>
+
+
+        <p class="section-description">
+
+            Ada beberapa hal sederhana yang mungkin
+            terlihat biasa bagi dunia, tetapi entah kenapa
+            menjadi begitu berarti ketika aku melihatnya.
+
+            <br><br>
+
+            Salah satunya adalah melihatmu bahagia,
+            tersenyum, dan menjadi dirimu sendiri.
+
+            Karena entah kenapa,
+            melihatmu bahagia selalu punya tempat
+            yang berbeda di hatiku. 🌸
+
+        </p>
+
+
+        <div class="main-photo">
+
+            <img
+                src="ultah/poto1.jpg"
+                alt="Kenangan indah Khanza">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SURAT
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="eyebrow">
+
+            🌹 dari hati yang paling tulus 🌹
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Sebuah surat untuk ratuku
+
+        </h2>
+
+
+        <div class="flower-line">
+
+            🌷 ✦ 🌸 ✦ 🌷
+
+        </div>
+
+
+        <div class="letter-wrap">
+
+            <div class="letter">
+
+
+                <p>
+
+                    Selamat ulang tahun untuk perempuan
+                    yang begitu berarti bagiku,
+                    Khanza Elma Mazaya.
+
+                    Hari ini bukan hanya tentang bertambahnya
+                    satu angka dalam usiamu.
+
+                    Hari ini adalah tentang merayakan
+                    hadirnya seorang perempuan luar biasa
+                    yang pernah dipertemukan oleh kehidupan
+                    denganku.
+
+                </p>
+
+
+                <p>
+
+                    Aku mungkin tidak selalu pandai
+                    merangkai kata.
+
+                    Kadang aku juga mungkin tidak tahu
+                    bagaimana cara menjelaskan semua
+                    yang ada di dalam hati.
+
+                    Tapi kalau hari ini aku diberi kesempatan
+                    untuk mengatakan semuanya,
+                    aku ingin kamu tahu satu hal:
+
+                    <strong>
+                        aku sangat bersyukur karena ada kamu.
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    Terima kasih sudah hadir.
+
+                    Terima kasih untuk tawa,
+                    cerita, candaan,
+                    percakapan kecil,
+                    perhatian sederhana,
+                    dan semua momen yang mungkin terlihat
+                    biasa saja bagi orang lain.
+
+                    Tapi bagiku,
+                    semuanya punya tempatnya sendiri.
+
+                    Semuanya menjadi bagian dari
+                    kenangan yang ingin kusimpan baik-baik.
+
+                </p>
+
+
+                <p>
+
+                    Khanza,
+
+                    kalau suatu hari kamu bertanya
+                    apa yang membuatmu begitu istimewa,
+                    mungkin aku tidak akan bisa memberikan
+                    satu jawaban sederhana.
+
+                    Karena bukan hanya satu hal.
+
+                    Bukan hanya senyummu.
+
+                    Bukan hanya caramu berbicara.
+
+                    Bukan hanya caramu tertawa.
+
+                    Tetapi keseluruhan dirimu.
+
+                    Cara kamu menjadi kamu.
+
+                    Dan justru itulah yang membuatmu
+                    begitu berharga. 🌷
+
+                </p>
+
+
+                <p>
+
+                    Aku ingin kamu terus bertumbuh.
+
+                    Terus mengejar hal-hal yang kamu impikan.
+
+                    Terus berjalan meskipun kadang langkahmu
+                    terasa berat.
+
+                    Dan kalau suatu hari nanti kamu merasa lelah,
+                    semoga kamu selalu ingat bahwa kamu sudah
+                    berhasil melewati begitu banyak hal
+                    sampai sejauh ini.
+
+                </p>
+
+
+                <p>
+
+                    Jangan pernah merasa bahwa dirimu
+                    tidak cukup.
+
+                    Jangan pernah berpikir bahwa keberadaanmu
+                    tidak berarti.
+
+                    Karena ada seseorang yang melihatmu
+                    sebagai seseorang yang sangat berharga.
+
+                    Seseorang yang ingin melihatmu bahagia.
+
+                    Seseorang yang selalu mendoakan
+                    hal-hal baik untukmu.
+
+                </p>
+
+
+                <p>
+
+                    Kalau hidup adalah sebuah buku,
+                    mungkin kita tidak akan pernah tahu
+                    seperti apa halaman berikutnya.
+
+                    Tapi aku berharap halaman-halaman
+                    berikutnya akan dipenuhi banyak hal indah.
+
+                    Banyak tawa.
+
+                    Banyak cerita.
+
+                    Banyak perjalanan.
+
+                    Dan banyak momen sederhana
+                    yang suatu hari nanti bisa kita kenang
+                    sambil tersenyum.
+
+                </p>
+
+
+                <p>
+
+                    Jadi di hari ulang tahunmu ini,
+                    aku tidak ingin hanya berkata
+                    "selamat ulang tahun".
+
+                    Aku ingin mendoakanmu.
+
+                    Semoga langkahmu selalu dimudahkan.
+
+                    Semoga hatimu selalu menemukan ketenangan.
+
+                    Semoga impianmu satu per satu
+                    menemukan jalannya.
+
+                    Semoga kamu selalu dikelilingi
+                    orang-orang yang tulus menyayangimu.
+
+                    Dan semoga kehidupan selalu memberikanmu
+                    alasan baru untuk tersenyum.
+
+                </p>
+
+
+                <p>
+
+                    Terakhir...
+
+                    Terima kasih sudah menjadi Khanza.
+
+                    Tidak perlu menjadi siapa-siapa.
+
+                    Tidak perlu menjadi sempurna.
+
+                    Cukup menjadi dirimu sendiri.
+
+                    Karena bagi seseorang,
+                    kamu sudah lebih dari cukup.
+
+                    Kamu adalah perempuan yang ingin
+                    selalu kulihat bahagia.
+
+                    Kamu adalah seseorang yang ingin
+                    selalu kulihat tersenyum.
+
+                    Dan kamu adalah seseorang yang
+                    akan selalu punya tempat spesial
+                    di hatiku. 💗
+
+                </p>
+
+
+                <div class="flower-line">
+
+                    🌸 ❀ 🌷 ❀ 🌹
+
+                </div>
+
+
+                <div class="signature">
+
+                    dengan seluruh doa baik untukmu,
+                    dari hati yang tulus ♡
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     GALERI
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="eyebrow">
+
+            🌸 potongan kecil tentangmu 🌸
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Hal-hal yang membuatmu istimewa
+
+        </h2>
+
+
+        <div class="flower-line">
+
+            🌷 ♡ 🌷 ♡ 🌷
+
+        </div>
+
+
+        <p class="section-description">
+
+            Mungkin hanya hal-hal sederhana.
+
+            Tetapi justru dari hal-hal kecil itulah
+            rasa sayang tumbuh tanpa kita sadari.
+
+            Senyummu,
+            tawamu,
+            caramu bercerita,
+            dan caramu menjadi dirimu sendiri.
+
+        </p>
+
+
+        <div class="gallery">
+
+
+            <div class="polaroid">
+
+                <img
+                    src="ultah/poto2.jpg"
+                    alt="Senyum Khanza">
+
+                <p>
+
+                    Senyummu 🌷
+
+                </p>
+
+            </div>
+
+
+            <div class="polaroid">
+
+                <img
+                    src="ultah/poto3.jpg"
+                    alt="Khanza yang penuh semangat">
+
+                <p>
+
+                    Semangatmu ✨
+
+                </p>
+
+            </div>
+
+
+            <div class="polaroid">
+
+                <img
+                    src="ultah/poto4.jpg"
+                    alt="Khanza yang istimewa">
+
+                <p>
+
+                    Kamu, apa adanya 👑
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     KARTU
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="eyebrow">
+
+            🌹 karena kamu pantas mendengarnya 🌹
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Tiga hal untuk ratuku
+
+        </h2>
+
+
+        <div class="flower-line">
+
+            🌷 💗 🌸 💗 🌷
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🌷
+                </div>
+
+                <h3>
+
+                    Kamu sangat berarti
+
+                </h3>
+
+                <p>
+
+                    Jangan pernah meragukan arti keberadaanmu.
+
+                    Ada begitu banyak hal yang menjadi lebih
+                    indah hanya karena kamu hadir di dalamnya.
+
+                    Dan ada seseorang yang selalu bersyukur
+                    karena pernah menemukanmu.
+
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    👑
+                </div>
+
+                <h3>
+
+                    Kamu adalah ratuku
+
+                </h3>
+
+                <p>
+
+                    Bukan karena mahkota,
+                    bukan karena kesempurnaan.
+
+                    Tetapi karena ada tempat khusus
+                    di dalam hati yang hanya bisa
+                    ditempati oleh seseorang sepertimu.
+
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🌹
+                </div>
+
+                <h3>
+
+                    Tetaplah menjadi Khanza
+
+                </h3>
+
+                <p>
+
+                    Kamu tidak perlu menjadi orang lain
+                    untuk menjadi istimewa.
+
+                    Tetaplah menjadi dirimu sendiri.
+
+                    Karena justru dirimu yang apa adanya
+                    itulah yang membuatmu begitu berharga.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LINIMASA
+===================================================== -->
+
+<section>
+
+    <div class="container">
+
+        <div class="eyebrow">
+
+            🌸 cerita kecil yang kusimpan 🌸
+
+        </div>
+
+
+        <h2 class="section-title">
+
+            Momen yang ingin kuingat
+
+        </h2>
+
+
+        <div class="flower-line">
+
+            ❀ ── 💗 ── ❀
+
+        </div>
+
+
+        <div class="timeline">
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-date">
+
+                    Bab 01
+
+                </div>
+
+                <h3>
+
+                    Awal dari semuanya
+
+                </h3>
+
+                <p>
+
+                    Entah bagaimana,
+                    kehidupan mempertemukan dua orang.
+
+                    Dari sesuatu yang mungkin terlihat sederhana,
+                    perlahan lahir percakapan,
+                    tawa, cerita,
+                    dan kenangan yang ternyata berarti.
+
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-date">
+
+                    Bab 02
+
+                </div>
+
+                <h3>
+
+                    Momen-momen sederhana
+
+                </h3>
+
+                <p>
+
+                    Percakapan,
+                    tawa,
+                    candaan,
+                    cerita random,
+                    perhatian kecil,
+                    dan banyak hal yang mungkin
+                    tidak pernah kita rencanakan.
+
+                    Tetapi justru menjadi bagian
+                    paling manis dari perjalanan ini.
+
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-date">
+
+                    Bab 03
+
+                </div>
+
+                <h3>
+
+                    Hari ini 🌷
+
+                </h3>
+
+                <p>
+
+                    Hari ulang tahunmu.
+
+                    Hari ketika dunia seolah berhenti
+                    sebentar hanya untuk merayakan
+                    seorang perempuan bernama
+                    Khanza Elma Mazaya.
+
+                    Perempuan yang sangat berarti.
+
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <div class="timeline-dot"></div>
+
+                <div class="timeline-date">
+
+                    Bab 04
+
+                </div>
+
+                <h3>
+
+                    Bersambung... 💗
+
+                </h3>
+
+                <p>
+
+                    Karena mungkin cerita terbaik
+                    bukanlah cerita yang sudah selesai.
+
+                    Melainkan cerita yang masih memiliki
+                    banyak halaman kosong untuk diisi
+                    dengan perjalanan,
+                    tawa,
+                    doa,
+                    dan kenangan baru.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     KEJUTAN TERAKHIR
+===================================================== -->
+
+<section class="final-section">
+
+    <div class="final-card">
+
+        <div class="big-heart">
+
+            💗
+
+        </div>
+
+
+        <div class="flower-decoration">
+
+            🌷 🌸 👑 🌸 🌷
+
+        </div>
+
+
+        <h2>
+
+            Satu hal terakhir...
+
+        </h2>
+
+
+        <p>
+
+            Aku membuat sudut kecil di internet ini
+            hanya untuk satu alasan sederhana:
+
+            <br><br>
+
+            <strong>
+
+                untuk mengingatkanmu
+                betapa berharganya dirimu.
+
+            </strong>
+
+            <br><br>
+
+            Semoga di tahun barumu nanti,
+            kamu menemukan lebih banyak alasan untuk tersenyum,
+            lebih banyak keberanian untuk mengejar impian,
+            lebih banyak kebahagiaan,
+            dan lebih banyak hari yang membuatmu berkata,
+
+            <br><br>
+
+            <em>
+
+                "Ternyata hidup seindah ini." 🌷
+
+            </em>
+
+        </p>
+
+
+        <button
+            id="surpriseButton"
+            class="surprise-button">
+
+            Buka kejutan terakhir 🎁💗
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MODAL KEJUTAN
+===================================================== -->
+
+<div
+    id="surpriseModal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle">
+
+    <div class="modal-box">
+
+
+        <div class="modal-heart">
+
+            💗
+
+        </div>
+
+
+        <div class="modal-flowers">
+
+            🌷 🌸 🌹 👑 🌹 🌸 🌷
+
+        </div>
+
+
+        <h2 id="modalTitle">
+
+            Selamat Ulang Tahun, Istriku 💗
+
+        </h2>
+
+
+        <div class="modal-name">
+
+            Khanza Elma Mazaya
+
+        </div>
+
+
+        <div class="flower-line">
+
+            ❀ ♡ ❀ ♡ ❀
+
+        </div>
+
+
+        <p>
+
+            Kalau sampai di bagian ini,
+            berarti kamu sudah membaca semua
+            kata-kata kecil yang sengaja aku titipkan
+            untukmu.
+
+            <br><br>
+
+            Aku mungkin tidak bisa memberikan seluruh
+            hal indah yang ada di dunia ini kepadamu.
+
+            Tapi aku bisa memberikan satu hal
+            yang selalu bisa aku berikan:
+
+            <br><br>
+
+            <strong>
+
+                doa yang baik untukmu.
+
+            </strong>
+
+            <br><br>
+
+            Semoga langkahmu selalu dimudahkan.
+
+            Semoga hatimu selalu menemukan ketenangan.
+
+            Semoga impianmu satu per satu menjadi nyata.
+
+            Semoga setiap langkah kecil yang kamu ambil
+            membawa kamu semakin dekat dengan
+            kehidupan yang kamu impikan.
+
+            <br><br>
+
+            Kalau suatu hari nanti kamu lupa
+            betapa istimewanya dirimu,
+            kembali saja ke halaman kecil ini.
+
+            <br><br>
+
+            Baca lagi semuanya.
+
+            Dan ingat satu hal:
+
+            <br><br>
+
+            <strong>
+
+                keberadaanmu adalah sesuatu
+                yang sangat layak untuk disyukuri. 🫶
+
+            </strong>
+
+            <br><br>
+
+            Kamu adalah perempuan yang pantas
+            mendapatkan banyak kebahagiaan.
+
+            Kamu pantas mendapatkan ketenangan.
+
+            Kamu pantas memiliki mimpi-mimpi besar.
+
+            Dan kamu pantas untuk dicintai,
+            dihargai,
+            serta diperlakukan dengan tulus.
+
+            <br><br>
+
+            Selamat bertambah usia,
+            istriku.
+
+            <br><br>
+
+            Selamat bertumbuh.
+
+            Selamat menemukan lebih banyak kebahagiaan.
+
+            Selamat menemukan lebih banyak alasan
+            untuk tersenyum.
+
+            <br><br>
+
+            Semoga tahun ini menjadi salah satu
+            tahun terbaik dalam hidupmu.
+
+            <br><br>
+
+            Dan semoga, di antara begitu banyak
+            hal indah yang akan datang,
+            selalu ada satu hal yang tidak pernah berubah:
+
+            <br><br>
+
+            <strong>
+
+                kamu akan selalu menjadi
+                seseorang yang sangat berarti.
+
+            </strong>
+
+        </p>
+
+
+        <div class="flower-line">
+
+            🌸 🌷 🌹 💐 🌹 🌷 🌸
+
+        </div>
+
+
+        <p class="modal-poem">
+
+            Kalau suatu hari nanti dunia terasa terlalu ramai,
+            semoga hatimu menemukan tempat untuk beristirahat.
+
+            <br><br>
+
+            Kalau langkahmu terasa berat,
+            semoga selalu ada cahaya kecil
+            yang menuntunmu pulang.
+
+            <br><br>
+
+            Kalau kamu mulai meragukan dirimu sendiri,
+            semoga kamu mengingat kembali
+            betapa banyak hal yang sudah berhasil kamu lewati.
+
+            <br><br>
+
+            Dan kalau suatu hari nanti
+            kamu membaca pesan ini lagi,
+
+            semoga kamu masih bisa merasakan
+            betapa tulusnya semua doa
+            yang pernah dituliskan untukmu.
+
+        </p>
+
+
+        <div class="flower-line">
+
+            ❀ ─── 💗 ─── ❀
+
+        </div>
+
+
+        <p>
+
+            Jadi...
+
+            <br><br>
+
+            <strong>
+
+                Selamat ulang tahun, istriku.
+
+            </strong>
+
+            <br><br>
+
+            Selamat ulang tahun,
+            <strong>Khanza Elma Mazaya</strong>.
+
+            <br><br>
+
+            Terima kasih sudah menjadi perempuan
+            yang begitu berarti.
+
+            Terima kasih sudah menjadi dirimu sendiri.
+
+            Dan terima kasih karena,
+            dari sekian banyak manusia di dunia ini,
+            kehidupan mempertemukan aku denganmu.
+
+            <br><br>
+
+            Semoga senyummu selalu menemukan alasannya.
+
+            Semoga hatimu selalu dipenuhi ketenangan.
+
+            Semoga langkahmu selalu dipenuhi keberanian.
+
+            Semoga hidupmu dipenuhi bunga-bunga kebahagiaan.
+
+            <br><br>
+
+            Dan semoga kamu selalu ingat...
+
+            <br><br>
+
+            <strong>
+
+                kamu adalah ratuku. 👑🌷
+
+            </strong>
+
+        </p>
+
+
+        <div class="modal-signature">
+
+            <small>
+
+                dengan cinta dan doa yang tulus
+
+            </small>
+
+            Dari Suamimu,
+
+            <br>
+
+            Randi Syahputra ♡
+
+        </div>
+
+
+        <div class="modal-ornament">
+
+            🌹 🌸 🌷 💗 🌷 🌸 🌹
+
+        </div>
+
+
+        <button
+            id="closeModal"
+            class="close-modal">
+
+            Simpan pesan kecil ini 🤍
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    🌷 dibuat dengan sedikit kode,
+    banyak doa,
+    ribuan rasa sayang,
+    dan sepotong hati untuk Khanza ♡ 🌸
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   PEMILIH ELEMEN
+========================================================= */
+
+const $ = (selector) =>
+    document.querySelector(selector);
+
+
+/* =========================================================
+   ELEMENT
+========================================================= */
+
+const opening =
+    $("#opening");
+
+const envelope =
+    $("#envelope");
+
+const openButton =
+    $("#openButton");
+
+const musicButton =
+    $("#musicButton");
+
+const musicStatus =
+    $("#musicStatus");
+
+const volumeControl =
+    $("#volumeControl");
+
+const surpriseButton =
+    $("#surpriseButton");
+
+const surpriseModal =
+    $("#surpriseModal");
+
+const closeModal =
+    $("#closeModal");
+
+const floatingHearts =
+    $("#floating-hearts");
+
+
+/* =========================================================
+   MUSIK ASLI
+   Web Audio API
+========================================================= */
+
+let audioContext = null;
+let masterGain = null;
+let musicTimer = null;
+
+let musicPlaying = false;
+let musicStarted = false;
+
+
+/* =========================================================
+   MEMBUAT AUDIO
+========================================================= */
+
+function createAudio(){
+
+    if(audioContext)
+        return;
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+    if(!AudioContext){
+
+        musicStatus.textContent =
+            "Audio tidak tersedia";
+
+        return;
+
+    }
+
+    audioContext =
+        new AudioContext();
+
+    masterGain =
+        audioContext.createGain();
+
+    masterGain.gain.value =
+        Number(volumeControl.value);
+
+    masterGain.connect(
+        audioContext.destination
+    );
+
+}
+
+
+/* =========================================================
+   MEMUTAR NADA
+========================================================= */
+
+function playNote(
+    frequency,
+    startTime,
+    duration,
+    volume = .04,
+    type = "sine"
+){
+
+    if(!audioContext || !masterGain)
+        return;
+
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    oscillator.type =
+        type;
+
+    oscillator.frequency.setValueAtTime(
+        frequency,
+        startTime
+    );
+
+    gain.gain.setValueAtTime(
+        0,
+        startTime
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        volume,
+        startTime + .04
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        startTime + duration
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(masterGain);
+
+    oscillator.start(startTime);
+
+    oscillator.stop(
+        startTime +
+        duration +
+        .05
+    );
+
+}
+
+
+/* =========================================================
+   FREKUENSI NADA
+========================================================= */
+
+const notes = {
+
+    C4:261.63,
+    D4:293.66,
+    E4:329.63,
+    F4:349.23,
+    G4:392.00,
+    A4:440.00,
+    B4:493.88,
+
+    C5:523.25,
+    D5:587.33,
+    E5:659.25,
+    F5:698.46,
+    G5:783.99,
+    A5:880.00
+
+};
+
+
+/* =========================================================
+   MELODI
+========================================================= */
+
+const melody = [
+
+    ["E4",0],
+    ["G4",.35],
+    ["A4",.7],
+    ["G4",1.05],
+
+    ["E4",1.45],
+    ["D4",1.8],
+    ["C4",2.15],
+
+    ["E4",2.7],
+    ["G4",3.05],
+    ["B4",3.4],
+    ["A4",3.8],
+
+    ["G4",4.2],
+    ["E4",4.65],
+    ["D4",5.05],
+
+    ["C4",5.5],
+    ["E4",5.85],
+    ["G4",6.2],
+
+    ["A4",6.6],
+    ["G4",7.0],
+    ["E4",7.4],
+
+    ["D4",7.8],
+    ["E4",8.15],
+    ["G4",8.5],
+
+    ["C5",9.0],
+    ["B4",9.4],
+    ["A4",9.8],
+
+    ["G4",10.25],
+    ["E4",10.7],
+    ["C4",11.2]
+
+];
+
+
+const chords = [
+
+    ["C4",0],
+    ["E4",0],
+    ["G4",0],
+
+    ["A4",2.7],
+    ["C5",2.7],
+    ["E4",2.7],
+
+    ["F4",5.5],
+    ["A4",5.5],
+    ["C5",5.5],
+
+    ["G4",8.2],
+    ["B4",8.2],
+    ["D5",8.2],
+
+    ["C4",11.0],
+    ["E4",11.0],
+    ["G4",11.0]
+
+];
+
+
+/* =========================================================
+   MENJADWALKAN MUSIK
+========================================================= */
+
+function scheduleSong(){
+
+    if(!audioContext)
+        return;
+
+    const now =
+        audioContext.currentTime + .05;
+
+
+    melody.forEach(
+        ([note,time]) => {
+
+            playNote(
+                notes[note],
+                now + time,
+                .5,
+                .055,
+                "triangle"
+            );
+
+        }
+    );
+
+
+    chords.forEach(
+        ([note,time]) => {
+
+            playNote(
+                notes[note],
+                now + time,
+                1.9,
+                .018,
+                "sine"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   MEMULAI MUSIK
+========================================================= */
+
+async function startMusic(){
+
+    createAudio();
+
+    if(!audioContext)
+        return;
+
+
+    if(
+        audioContext.state ===
+        "suspended"
+    ){
+
+        try{
+
+            await audioContext.resume();
+
+        }catch(error){
+
+            console.log(
+                "Audio belum dapat diputar.",
+                error
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    if(musicPlaying)
+        return;
+
+
+    musicPlaying =
+        true;
+
+    musicStarted =
+        true;
+
+
+    musicButton.textContent =
+        "❚❚";
+
+    musicStatus.textContent =
+        "Sedang memainkan...";
+
+
+    scheduleSong();
+
+
+    musicTimer =
+        setInterval(
+            scheduleSong,
+            11700
+        );
+
+}
+
+
+/* =========================================================
+   MENGHENTIKAN MUSIK
+========================================================= */
+
+function stopMusic(){
+
+    if(!audioContext)
+        return;
+
+
+    musicPlaying =
+        false;
+
+
+    clearInterval(
+        musicTimer
+    );
+
+
+    musicTimer =
+        null;
+
+
+    musicButton.textContent =
+        "▶";
+
+
+    musicStatus.textContent =
+        "Musik dijeda";
+
+}
+
+
+/* =========================================================
+   TOMBOL MUSIK
+========================================================= */
+
+musicButton.addEventListener(
+    "click",
+    async () => {
+
+        if(musicPlaying){
+
+            stopMusic();
+
+        }else{
+
+            await startMusic();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   VOLUME
+========================================================= */
+
+volumeControl.addEventListener(
+    "input",
+    () => {
+
+        if(masterGain){
+
+            masterGain.gain.value =
+                Number(
+                    volumeControl.value
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   EFEK SUARA
+========================================================= */
+
+function playChime(){
+
+    createAudio();
+
+    if(!audioContext)
+        return;
+
+
+    if(
+        audioContext.state ===
+        "suspended"
+    ){
+
+        audioContext.resume()
+            .catch(() => {});
+
+    }
+
+
+    const now =
+        audioContext.currentTime;
+
+
+    playNote(
+        notes.C5,
+        now,
+        .5,
+        .07,
+        "sine"
+    );
+
+
+    playNote(
+        notes.E5,
+        now + .12,
+        .5,
+        .06,
+        "sine"
+    );
+
+
+    playNote(
+        notes.G5,
+        now + .24,
+        .8,
+        .05,
+        "sine"
+    );
+
+}
+
+
+/* =========================================================
+   MEMBUKA AMPLOP
+========================================================= */
+
+let websiteOpened =
+    false;
+
+
+function openEnvelope(){
+
+    if(websiteOpened)
+        return;
+
+
+    websiteOpened =
+        true;
+
+
+    envelope.classList.add(
+        "open"
+    );
+
+
+    playChime();
+
+    /*
+       Musik dijalankan tanpa membuat
+       animasi pembukaan menunggu audio.
+    */
+
+    startMusic();
+
+
+    setTimeout(
+        () => {
+
+            opening.classList.add(
+                "hide"
+            );
+
+            document.body.style.overflowX =
+                "hidden";
+
+        },
+        900
+    );
+
+}
+
+
+openButton.addEventListener(
+    "click",
+    openEnvelope
+);
+
+
+envelope.addEventListener(
+    "click",
+    openEnvelope
+);
+
+
+/* =========================================================
+   HATI & BUNGA MELAYANG
+========================================================= */
+
+function createFloatingHeart(){
+
+    if(!floatingHearts)
+        return;
+
+
+    const heart =
+        document.createElement(
+            "div"
+        );
+
+
+    heart.className =
+        "float-heart";
+
+
+    const hearts = [
+
+        "♡",
+        "♥",
+        "💕",
+        "💗",
+        "🌸",
+        "🌷",
+        "🌹",
+        "✦"
+
+    ];
+
+
+    heart.textContent =
+        hearts[
+            Math.floor(
+                Math.random() *
+                hearts.length
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random() *
+        100 +
+        "%";
+
+
+    heart.style.fontSize =
+        (
+            12 +
+            Math.random() *
+            20
+        ) +
+        "px";
+
+
+    heart.style.animationDuration =
+        (
+            7 +
+            Math.random() *
+            8
+        ) +
+        "s";
+
+
+    floatingHearts.appendChild(
+        heart
+    );
+
+
+    setTimeout(
+        () => heart.remove(),
+        16000
+    );
+
+}
+
+
+setInterval(
+    createFloatingHeart,
+    900
+);
+
+
+/* =========================================================
+   KONFETI
+========================================================= */
+
+function createConfetti(){
+
+    const symbols = [
+
+        "✦",
+        "♥",
+        "♡",
+        "✧",
+        "🌸",
+        "🌷"
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < 80;
+        i++
+    ){
+
+        const piece =
+            document.createElement(
+                "div"
+            );
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        piece.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+
+        piece.style.fontSize =
+            (
+                8 +
+                Math.random() *
+                12
+            ) +
+            "px";
+
+
+        piece.style.animationDuration =
+            (
+                2 +
+                Math.random() *
+                3
+            ) +
+            "s";
+
+
+        piece.style.animationDelay =
+            Math.random() *
+            .7 +
+            "s";
+
+
+        document.body.appendChild(
+            piece
+        );
+
+
+        setTimeout(
+            () => piece.remove(),
+            5500
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LEDAKAN HATI
+========================================================= */
+
+function heartExplosion(){
+
+    const centerX =
+        window.innerWidth / 2;
+
+    const centerY =
+        window.innerHeight / 2;
+
+
+    for(
+        let i = 0;
+        i < 40;
+        i++
+    ){
+
+        const heart =
+            document.createElement(
+                "div"
+            );
+
+
+        heart.className =
+            "burst-heart";
+
+
+        const symbols = [
+            "💗",
+            "♡",
+            "🌸",
+            "🌷",
+            "💐"
+        ];
+
+
+        heart.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        heart.style.left =
+            centerX +
+            "px";
+
+
+        heart.style.top =
+            centerY +
+            "px";
+
+
+        const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+
+        const distance =
+            100 +
+            Math.random() *
+            350;
+
+
+        heart.style.setProperty(
+            "--x",
+            Math.cos(angle) *
+            distance +
+            "px"
+        );
+
+
+        heart.style.setProperty(
+            "--y",
+            Math.sin(angle) *
+            distance +
+            "px"
+        );
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(
+            () => heart.remove(),
+            2000
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function showModal(){
+
+    surpriseModal.classList.add(
+        "show"
+    );
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+function hideModal(){
+
+    surpriseModal.classList.remove(
+        "show"
+    );
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+
+}
+
+
+/* =========================================================
+   KEJUTAN TERAKHIR
+========================================================= */
+
+surpriseButton.addEventListener(
+    "click",
+    () => {
+
+        /*
+           Modal langsung dibuka.
+           Tidak menunggu proses musik.
+        */
+
+        showModal();
+
+        playChime();
+
+        createConfetti();
+
+        heartExplosion();
+
+        startMusic();
+
+    }
+);
+
+
+/* =========================================================
+   MENUTUP MODAL
+========================================================= */
+
+closeModal.addEventListener(
+    "click",
+    () => {
+
+        hideModal();
+
+    }
+);
+
+
+/* =========================================================
+   KLIK DI LUAR MODAL
+========================================================= */
+
+surpriseModal.addEventListener(
+    "click",
+    (event) => {
+
+        if(
+            event.target ===
+            surpriseModal
+        ){
+
+            hideModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TOMBOL ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            hideModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   HATI AWAL
+========================================================= */
+
+for(
+    let i = 0;
+    i < 8;
+    i++
+){
+
+    setTimeout(
+        createFloatingHeart,
+        i * 400
+    );
+
+}
+
+</script>
+
+</body>
+</html>
