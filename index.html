@@ -1,5 +1,5 @@
 <!--
-  GitHub Pages-ready birthday website
+  GitHub Pages ready
   Local assets:
     ultah/poto1.jpg
     ultah/poto2.jpg
@@ -7,8 +7,12 @@
     ultah/poto4.jpg
     ultah/sertamulia.mp3
 
-  Put this index.html in the repository root.
+  IMPORTANT:
+  - Keep index.html in the repository root.
+  - Keep the folder name "ultah" exactly as written.
+  - Music does NOT autoplay. The user must press ▶.
 -->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -1273,7 +1277,14 @@ footer{
 
 
 <body>
-    <audio id="bgMusic" src="ultah/sertamulia.mp3" preload="auto"></audio>
+
+<audio
+    id="bgMusic"
+    src="ultah/sertamulia.mp3"
+    preload="metadata"
+    loop>
+</audio>
+
 
 <!-- =====================================================
      LATAR
@@ -1308,14 +1319,14 @@ footer{
     <div class="music-info">
 
         <div class="music-title">
-            Sebuah Lagu Kecil Untukmu 🌷
+            Sertamulia 🎵
         </div>
 
         <div
             id="musicStatus"
             class="music-status">
 
-            Musik belum diputar
+            Tekan ▶ untuk memutar musik
 
         </div>
 
@@ -2572,21 +2583,25 @@ const floatingHearts =
 
 
 /* =========================================================
-   MUSIK ASLI
-   Web Audio API
+   MUSIK UTAMA — MP3 LOKAL
+   File: ultah/sertamulia.mp3
+
+   Web Audio API tetap dipakai untuk efek chime kecil.
+   Musik utama TIDAK autoplay.
+========================================================= */
+
+const bgMusic =
+    document.getElementById("bgMusic");
+
+let musicPlaying = false;
+
+
+/* =========================================================
+   WEB AUDIO — UNTUK EFEK CHIME SAJA
 ========================================================= */
 
 let audioContext = null;
 let masterGain = null;
-let musicTimer = null;
-
-let musicPlaying = false;
-let musicStarted = false;
-
-
-/* =========================================================
-   MEMBUAT AUDIO
-========================================================= */
 
 function createAudio(){
 
@@ -2597,14 +2612,8 @@ function createAudio(){
         window.AudioContext ||
         window.webkitAudioContext;
 
-    if(!AudioContext){
-
-        musicStatus.textContent =
-            "Audio tidak tersedia";
-
+    if(!AudioContext)
         return;
-
-    }
 
     audioContext =
         new AudioContext();
@@ -2623,7 +2632,7 @@ function createAudio(){
 
 
 /* =========================================================
-   MEMUTAR NADA
+   MEMUTAR NADA — EFEK CHIME
 ========================================================= */
 
 function playNote(
@@ -2682,7 +2691,7 @@ function playNote(
 
 
 /* =========================================================
-   FREKUENSI NADA
+   FREKUENSI NADA — EFEK CHIME
 ========================================================= */
 
 const notes = {
@@ -2700,219 +2709,86 @@ const notes = {
     E5:659.25,
     F5:698.46,
     G5:783.99,
-    A5:880.00
+    A5:880.00,
+
+    G5:783.99
 
 };
 
 
 /* =========================================================
-   MELODI
-========================================================= */
-
-const melody = [
-
-    ["E4",0],
-    ["G4",.35],
-    ["A4",.7],
-    ["G4",1.05],
-
-    ["E4",1.45],
-    ["D4",1.8],
-    ["C4",2.15],
-
-    ["E4",2.7],
-    ["G4",3.05],
-    ["B4",3.4],
-    ["A4",3.8],
-
-    ["G4",4.2],
-    ["E4",4.65],
-    ["D4",5.05],
-
-    ["C4",5.5],
-    ["E4",5.85],
-    ["G4",6.2],
-
-    ["A4",6.6],
-    ["G4",7.0],
-    ["E4",7.4],
-
-    ["D4",7.8],
-    ["E4",8.15],
-    ["G4",8.5],
-
-    ["C5",9.0],
-    ["B4",9.4],
-    ["A4",9.8],
-
-    ["G4",10.25],
-    ["E4",10.7],
-    ["C4",11.2]
-
-];
-
-
-const chords = [
-
-    ["C4",0],
-    ["E4",0],
-    ["G4",0],
-
-    ["A4",2.7],
-    ["C5",2.7],
-    ["E4",2.7],
-
-    ["F4",5.5],
-    ["A4",5.5],
-    ["C5",5.5],
-
-    ["G4",8.2],
-    ["B4",8.2],
-    ["D5",8.2],
-
-    ["C4",11.0],
-    ["E4",11.0],
-    ["G4",11.0]
-
-];
-
-
-/* =========================================================
-   MENJADWALKAN MUSIK
-========================================================= */
-
-function scheduleSong(){
-
-    if(!audioContext)
-        return;
-
-    const now =
-        audioContext.currentTime + .05;
-
-
-    melody.forEach(
-        ([note,time]) => {
-
-            playNote(
-                notes[note],
-                now + time,
-                .5,
-                .055,
-                "triangle"
-            );
-
-        }
-    );
-
-
-    chords.forEach(
-        ([note,time]) => {
-
-            playNote(
-                notes[note],
-                now + time,
-                1.9,
-                .018,
-                "sine"
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MEMULAI MUSIK
+   MEMULAI MUSIK MP3
+   Dipanggil HANYA dari tombol Play.
 ========================================================= */
 
 async function startMusic(){
 
-    createAudio();
-
-    if(!audioContext)
+    if(!bgMusic)
         return;
 
+    bgMusic.volume =
+        Number(volumeControl.value);
 
-    if(
-        audioContext.state ===
-        "suspended"
-    ){
+    try{
 
-        try{
+        await bgMusic.play();
 
-            await audioContext.resume();
+        musicPlaying =
+            true;
 
-        }catch(error){
+        musicButton.textContent =
+            "❚❚";
 
-            console.log(
-                "Audio belum dapat diputar.",
-                error
-            );
+        musicButton.setAttribute(
+            "aria-label",
+            "Jeda musik"
+        );
 
-            return;
+        musicStatus.textContent =
+            "Sedang memainkan...";
 
-        }
+    }catch(error){
+
+        console.log(
+            "MP3 belum dapat diputar:",
+            error
+        );
+
+        musicPlaying =
+            false;
+
+        musicButton.textContent =
+            "▶";
+
+        musicStatus.textContent =
+            "Tekan tombol ▶ untuk memutar";
 
     }
-
-
-    if(musicPlaying)
-        return;
-
-
-    musicPlaying =
-        true;
-
-    musicStarted =
-        true;
-
-
-    musicButton.textContent =
-        "❚❚";
-
-    musicStatus.textContent =
-        "Sedang memainkan...";
-
-
-    scheduleSong();
-
-
-    musicTimer =
-        setInterval(
-            scheduleSong,
-            11700
-        );
 
 }
 
 
 /* =========================================================
-   MENGHENTIKAN MUSIK
+   MENGHENTIKAN MUSIK MP3
 ========================================================= */
 
 function stopMusic(){
 
-    if(!audioContext)
+    if(!bgMusic)
         return;
 
+    bgMusic.pause();
 
     musicPlaying =
         false;
 
-
-    clearInterval(
-        musicTimer
-    );
-
-
-    musicTimer =
-        null;
-
-
     musicButton.textContent =
         "▶";
 
+    musicButton.setAttribute(
+        "aria-label",
+        "Putar musik"
+    );
 
     musicStatus.textContent =
         "Musik dijeda";
@@ -2921,7 +2797,7 @@ function stopMusic(){
 
 
 /* =========================================================
-   TOMBOL MUSIK
+   TOMBOL PLAY / PAUSE
 ========================================================= */
 
 musicButton.addEventListener(
@@ -2943,25 +2819,61 @@ musicButton.addEventListener(
 
 
 /* =========================================================
-   VOLUME
+   VOLUME MP3
 ========================================================= */
 
 volumeControl.addEventListener(
     "input",
     () => {
 
+        const volume =
+            Number(
+                volumeControl.value
+            );
+
+        if(bgMusic){
+
+            bgMusic.volume =
+                volume;
+
+        }
+
         if(masterGain){
 
             masterGain.gain.value =
-                Number(
-                    volumeControl.value
-                );
+                volume;
 
         }
 
     }
 );
 
+
+/* =========================================================
+   JIKA LAGU SELESAI
+   loop=true juga dipasang di <audio>.
+========================================================= */
+
+bgMusic.addEventListener(
+    "ended",
+    () => {
+
+        musicPlaying =
+            false;
+
+        musicButton.textContent =
+            "▶";
+
+        musicButton.setAttribute(
+            "aria-label",
+            "Putar musik"
+        );
+
+        musicStatus.textContent =
+            "Musik selesai";
+
+    }
+);
 
 /* =========================================================
    EFEK SUARA
@@ -3049,7 +2961,6 @@ function openEnvelope(){
        animasi pembukaan menunggu audio.
     */
 
-    startMusic();
 
 
     setTimeout(
@@ -3406,7 +3317,6 @@ surpriseButton.addEventListener(
 
         heartExplosion();
 
-        startMusic();
 
     }
 );
@@ -3485,31 +3395,6 @@ for(
 
 }
 
-</script>
-
-
-<script>
-/* Local MP3 — GitHub Pages */
-(() => {
-  const music = document.getElementById('bgMusic');
-  if (!music) return;
-
-  // Keep volume controlled by the existing page controls when possible.
-  music.loop = true;
-  music.volume = 0.8;
-
-  // Expose simple helpers for the page and avoid autoplay restrictions:
-  // playback starts only after the user's envelope/open interaction.
-  window.playLocalBirthdayMusic = () => music.play().catch(() => {});
-  window.pauseLocalBirthdayMusic = () => music.pause();
-
-  document.addEventListener('click', (event) => {
-    const target = event.target.closest('button, .envelope, .open-envelope, [role="button"]');
-    if (target) {
-      setTimeout(() => music.play().catch(() => {}), 150);
-    }
-  }, { passive: true });
-})();
 </script>
 
 </body>
