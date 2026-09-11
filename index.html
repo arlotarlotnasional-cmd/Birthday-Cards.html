@@ -1,3 +1,18 @@
+<!--
+  GitHub Pages ready
+  Local assets:
+    ultah/poto1.jpg
+    ultah/poto2.jpg
+    ultah/poto3.jpg
+    ultah/poto4.jpg
+    ultah/sertamulia.mp3
+
+  IMPORTANT:
+  - Keep index.html in the repository root.
+  - Keep the folder name "ultah" exactly as written.
+  - Music does NOT autoplay. The user must press ▶.
+-->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -33,22 +48,9 @@ body{
     overflow-x:hidden;
 
     background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255,255,255,.9),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 80% 30%,
-            rgba(255,190,220,.45),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #fff0f7,
-            #ffdce9,
-            #ffeef5
-        );
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.9),transparent 25%),
+        radial-gradient(circle at 80% 30%,rgba(255,190,220,.45),transparent 30%),
+        linear-gradient(135deg,#fff0f7,#ffdce9,#ffeef5);
 }
 
 body.modal-open{
@@ -118,10 +120,7 @@ body.modal-open{
 @keyframes floatUp{
 
     0%{
-        transform:
-            translateY(0)
-            rotate(0deg)
-            scale(.8);
+        transform:translateY(0) rotate(0deg) scale(.8);
         opacity:0;
     }
 
@@ -130,10 +129,7 @@ body.modal-open{
     }
 
     100%{
-        transform:
-            translateY(-110vh)
-            rotate(360deg)
-            scale(1.2);
+        transform:translateY(-110vh) rotate(360deg) scale(1.2);
         opacity:0;
     }
 
@@ -154,12 +150,7 @@ body.modal-open{
     align-items:center;
 
     background:
-        radial-gradient(
-            circle at center,
-            #ffd7e8,
-            #ffb9d5,
-            #f48fb1
-        );
+        radial-gradient(circle at center,#ffd7e8,#ffb9d5,#f48fb1);
 
     transition:
         opacity 1s ease,
@@ -173,9 +164,8 @@ body.modal-open{
 }
 
 .opening-content{
-    width:100%;
     text-align:center;
-    padding:25px 20px;
+    padding:25px;
 }
 
 .opening-small{
@@ -183,244 +173,141 @@ body.modal-open{
     letter-spacing:4px;
     text-transform:uppercase;
     color:white;
-    margin-bottom:42px;
+    margin-bottom:25px;
     opacity:.9;
 }
 
-
-/* =========================================================
-   ✉️ AMPLop — FIXED VERSION
-========================================================= */
-
-.envelope{
-    width:240px;
-    height:165px;
-
+ .envelope{
+    width:230px;
+    height:155px;
     position:relative;
-
-    margin:0 auto 38px;
-
+    margin:0 auto 30px;
     cursor:pointer;
-
-    filter:
-        drop-shadow(
-            0 25px 30px
-            rgba(120,30,70,.2)
-        );
-
-    perspective:900px;
+    filter:drop-shadow(0 25px 30px rgba(120,30,70,.2));
+    isolation:isolate;
 }
 
+/*
+   CLOSED:
+   The letter is behind the envelope body, so the body completely
+   covers it. No white "hole" and no letter text is visible.
 
-/* BADAN AMPLop */
-
+   OPEN:
+   The envelope body moves behind the letter, then the letter
+   slides upward and becomes visible.
+*/
 .envelope-body{
     position:absolute;
     inset:0;
-
     background:#fff5f8;
-
-    border-radius:13px;
-
+    border-radius:12px;
     overflow:hidden;
-
-    box-shadow:
-        inset 0 0 0 1px
-        rgba(255,255,255,.6);
-
-    z-index:1;
-}
-
-
-/* LIPATAN BAGIAN BAWAH */
-
-.envelope-body::before{
-    content:"";
-
-    position:absolute;
-
-    left:-25px;
-    bottom:-88px;
-
-    width:210px;
-    height:210px;
-
-    background:#ffe1eb;
-
-    transform:rotate(45deg);
-
-    z-index:2;
-}
-
-
-/* SURAT DI DALAM */
-
-.envelope-letter{
-    position:absolute;
-
-    width:178px;
-    height:118px;
-
-    left:31px;
-    top:28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #fff8fb
-        );
-
-    border-radius:9px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:12px;
-
-    font-family:'DM Serif Display',serif;
-    font-size:21px;
-    color:#e66d9b;
-
-    text-align:center;
-
-    box-shadow:
-        0 8px 18px
-        rgba(100,30,60,.10);
-
-    transition:
-        transform .9s cubic-bezier(
-            .22,
-            1,
-            .36,
-            1
-        ),
-        top .9s cubic-bezier(
-            .22,
-            1,
-            .36,
-            1
-        );
-
-    /*
-       Surat berada di dalam amplop.
-       Di bawah flap tapi di atas badan.
-    */
     z-index:3;
 }
 
-
-/* FLAP ATAS */
+.envelope-body:before{
+    content:"";
+    position:absolute;
+    width:165px;
+    height:165px;
+    background:#ffe2ec;
+    transform:rotate(45deg);
+    left:33px;
+    top:58px;
+}
 
 .envelope-flap{
     position:absolute;
-
     width:0;
     height:0;
 
-    border-left:120px solid transparent;
-    border-right:120px solid transparent;
-    border-top:88px solid #ffc1d8;
+    border-left:115px solid transparent;
+    border-right:115px solid transparent;
+    border-top:85px solid #ffc1d8;
 
     top:0;
     left:0;
 
-    transform-origin:50% 0%;
-
-    transition:
-        transform .85s
-        cubic-bezier(
-            .68,
-            -.55,
-            .27,
-            1.55
-        );
-
-    /*
-       Flap menjadi lapisan paling atas
-       ketika amplop masih tertutup.
-    */
-    z-index:5;
-
-    filter:
-        drop-shadow(
-            0 2px 2px
-            rgba(180,70,110,.05)
-        );
-}
-
-
-/* SAAT AMplop DIBUKA */
-
-.envelope.open .envelope-flap{
-    transform:
-        rotateX(180deg);
-}
-
-
-/*
-   Surat keluar sedikit ke atas ketika dibuka.
-*/
-
-.envelope.open .envelope-letter{
-    top:-78px;
-
-    transform:
-        rotate(-3deg)
-        translateY(-5px);
-
+    transform-origin:top;
+    transition:transform .8s cubic-bezier(.68,-.55,.27,1.55);
     z-index:4;
 }
 
-
-/*
-   Saat terbuka, surat harus tetap
-   terlihat di atas badan amplop.
-*/
-
 .envelope.open .envelope-body{
+    z-index:2;
+}
+
+.envelope.open .envelope-flap{
+    transform:rotateX(180deg);
+}
+
+.envelope-letter{
+    position:absolute;
+    background:linear-gradient(145deg,#fff,#fff8fb);
+    width:190px;
+    height:125px;
+    left:20px;
+    top:15px;
+    border-radius:9px;
+
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+
+    padding:24px 16px 18px;
+    text-align:center;
+
+    font-family:'DM Serif Display',serif;
+    font-size:23px;
+    line-height:1.35;
+    color:#e66d9b;
+
+    box-shadow:0 10px 25px rgba(120,30,70,.08);
+
+    transition:
+        transform .9s ease .12s,
+        top .9s cubic-bezier(.22,.61,.36,1) .12s;
+
     z-index:1;
 }
 
+.envelope-letter::before{
+    content:"♡";
+    position:absolute;
+    top:8px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-family:'Manrope',sans-serif;
+    font-size:17px;
+    color:#ef8eb2;
+}
 
-/* =========================================================
-   TOMBOL BUKA
-========================================================= */
+.envelope.open .envelope-letter{
+    top:-112px;
+    height:205px;
+    padding-top:30px;
+    transform:rotate(-3deg);
+    z-index:5;
+}
 
 .open-button{
     border:none;
-
     padding:14px 28px;
-
     border-radius:100px;
 
     background:white;
-
     color:#df5d8e;
 
     font-weight:800;
-
     cursor:pointer;
 
-    box-shadow:
-        0 12px 30px
-        rgba(150,40,80,.2);
-
+    box-shadow:0 12px 30px rgba(150,40,80,.2);
     transition:.3s;
-
-    position:relative;
-    z-index:10;
 }
 
 .open-button:hover{
-    transform:
-        translateY(-3px)
-        scale(1.03);
-}
-
-.open-button:active{
-    transform:scale(.98);
+    transform:translateY(-3px) scale(1.03);
 }
 
 
@@ -430,38 +317,28 @@ body.modal-open{
 
 .music-player{
     position:fixed;
-
     right:20px;
     top:20px;
-
     z-index:100;
 
     display:flex;
     align-items:center;
     gap:10px;
 
-    background:
-        rgba(255,255,255,.78);
-
+    background:rgba(255,255,255,.78);
     backdrop-filter:blur(15px);
 
     padding:9px 12px;
-
     border-radius:100px;
 
-    box-shadow:
-        0 10px 30px
-        rgba(100,30,60,.12);
+    box-shadow:0 10px 30px rgba(100,30,60,.12);
 
-    border:
-        1px solid
-        rgba(255,255,255,.8);
+    border:1px solid rgba(255,255,255,.8);
 }
 
 .music-button{
     width:38px;
     height:38px;
-
     border:none;
     border-radius:50%;
 
@@ -469,7 +346,6 @@ body.modal-open{
     color:white;
 
     cursor:pointer;
-
     font-size:15px;
 
     transition:.25s;
@@ -526,31 +402,18 @@ section{
 
 .section-title{
     text-align:center;
-
     font-family:'DM Serif Display',serif;
-
-    font-size:
-        clamp(
-            40px,
-            6vw,
-            70px
-        );
-
+    font-size:clamp(40px,6vw,70px);
     color:#71384e;
-
     line-height:1;
-
     margin-bottom:20px;
 }
 
 .section-description{
     max-width:620px;
     margin:auto;
-
     text-align:center;
-
     line-height:1.8;
-
     color:#80596a;
 }
 
@@ -561,27 +424,17 @@ section{
 
 .flower-decoration{
     text-align:center;
-
     font-size:24px;
-
     letter-spacing:7px;
-
-    margin:
-        15px 0
-        25px;
-
+    margin:15px 0 25px;
     opacity:.9;
 }
 
 .flower-line{
     text-align:center;
-
     color:#df7099;
-
     font-size:18px;
-
     letter-spacing:8px;
-
     margin:15px 0;
 }
 
@@ -594,12 +447,10 @@ section{
     min-height:100vh;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     text-align:center;
-
     padding-top:120px;
 }
 
@@ -610,12 +461,7 @@ section{
 .hero-crown{
     font-size:45px;
     margin-bottom:10px;
-
-    animation:
-        softFloat
-        3s
-        ease-in-out
-        infinite;
+    animation:softFloat 3s ease-in-out infinite;
 }
 
 @keyframes softFloat{
@@ -632,14 +478,10 @@ section{
 
 .hero-badge{
     display:inline-flex;
-
     padding:8px 15px;
-
     border-radius:100px;
 
-    background:
-        rgba(255,255,255,.7);
-
+    background:rgba(255,255,255,.7);
     color:#d65f8c;
 
     font-size:12px;
@@ -647,21 +489,12 @@ section{
 
     margin-bottom:25px;
 
-    box-shadow:
-        0 8px 20px
-        rgba(100,30,60,.08);
+    box-shadow:0 8px 20px rgba(100,30,60,.08);
 }
 
 .hero h1{
     font-family:'DM Serif Display',serif;
-
-    font-size:
-        clamp(
-            60px,
-            11vw,
-            125px
-        );
-
+    font-size:clamp(60px,11vw,125px);
     line-height:.88;
 
     color:#71384e;
@@ -676,52 +509,32 @@ section{
 
 .hero-name{
     font-family:'DM Serif Display',serif;
-
-    font-size:
-        clamp(
-            25px,
-            4vw,
-            42px
-        );
-
+    font-size:clamp(25px,4vw,42px);
     color:#a34c70;
-
     margin-top:-10px;
-
     margin-bottom:25px;
 }
 
 .hero-subtitle{
     max-width:650px;
-
     margin:auto;
 
     font-size:16px;
-
     line-height:1.9;
-
     color:#80596a;
 }
 
 .scroll-hint{
     margin-top:55px;
-
     font-size:11px;
-
     letter-spacing:3px;
-
     text-transform:uppercase;
-
     color:#c27b96;
 
-    animation:
-        bounce
-        2s
-        infinite;
+    animation:bounce 2s infinite;
 }
 
 @keyframes bounce{
-
     0%,100%{
         transform:translateY(0);
     }
@@ -729,7 +542,6 @@ section{
     50%{
         transform:translateY(8px);
     }
-
 }
 
 
@@ -743,9 +555,7 @@ section{
 
 .main-photo{
     width:min(760px,100%);
-
-    margin:
-        50px auto 0;
+    margin:50px auto 0;
 
     padding:13px;
 
@@ -754,10 +564,8 @@ section{
     border-radius:18px;
 
     box-shadow:
-        0 30px 80px
-        rgba(110,40,70,.15),
-        0 5px 20px
-        rgba(110,40,70,.08);
+        0 30px 80px rgba(110,40,70,.15),
+        0 5px 20px rgba(110,40,70,.08);
 
     transform:rotate(-1deg);
 
@@ -767,35 +575,27 @@ section{
 .main-photo:before,
 .main-photo:after{
     position:absolute;
-
     font-size:35px;
-
     z-index:3;
 }
 
 .main-photo:before{
     content:"🌷";
-
     left:-25px;
     top:-25px;
 }
 
 .main-photo:after{
     content:"🌸";
-
     right:-25px;
     bottom:-25px;
 }
 
 .main-photo img{
     display:block;
-
     width:100%;
-
     aspect-ratio:4/3;
-
     object-fit:cover;
-
     border-radius:10px;
 }
 
@@ -806,75 +606,53 @@ section{
 
 .letter-wrap{
     max-width:800px;
-
-    margin:
-        60px auto 0;
+    margin:60px auto 0;
 }
 
 .letter{
-    background:
-        rgba(255,255,255,.75);
-
+    background:rgba(255,255,255,.75);
     backdrop-filter:blur(15px);
 
     padding:55px;
 
     border-radius:20px;
 
-    box-shadow:
-        0 25px 70px
-        rgba(100,30,60,.1);
+    box-shadow:0 25px 70px rgba(100,30,60,.1);
 
-    border:
-        1px solid
-        rgba(255,255,255,.8);
+    border:1px solid rgba(255,255,255,.8);
 
     position:relative;
 }
 
 .letter:before{
     content:"🌹";
-
     position:absolute;
-
     left:22px;
     top:18px;
-
     font-size:25px;
 }
 
 .letter:after{
     content:"🌷";
-
     position:absolute;
-
     right:22px;
     bottom:18px;
-
     font-size:25px;
 }
 
 .letter p{
     font-family:'DM Serif Display',serif;
-
     font-size:22px;
-
     line-height:1.8;
-
     color:#684052;
-
     margin-bottom:20px;
 }
 
 .signature{
     margin-top:30px;
-
     text-align:right;
-
     font-family:'DM Serif Display',serif;
-
     color:#df6795;
-
     font-size:25px;
 }
 
@@ -885,10 +663,7 @@ section{
 
 .gallery{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:30px;
 
     margin-top:60px;
@@ -896,15 +671,9 @@ section{
 
 .polaroid{
     background:white;
+    padding:12px 12px 25px;
 
-    padding:
-        12px
-        12px
-        25px;
-
-    box-shadow:
-        0 20px 45px
-        rgba(100,30,60,.12);
+    box-shadow:0 20px 45px rgba(100,30,60,.12);
 
     transition:.4s;
 
@@ -913,14 +682,10 @@ section{
 
 .polaroid:after{
     content:"♡";
-
     position:absolute;
-
     right:12px;
     top:8px;
-
     font-size:20px;
-
     color:#e96f9f;
 }
 
@@ -937,29 +702,20 @@ section{
 }
 
 .polaroid:hover{
-    transform:
-        rotate(0)
-        translateY(-10px)
-        scale(1.03);
+    transform:rotate(0) translateY(-10px) scale(1.03);
 }
 
 .polaroid img{
     width:100%;
-
     aspect-ratio:1/1;
-
     object-fit:cover;
 }
 
 .polaroid p{
     text-align:center;
-
     margin-top:15px;
-
     font-family:'DM Serif Display',serif;
-
     font-size:20px;
-
     color:#714054;
 }
 
@@ -970,36 +726,23 @@ section{
 
 .cards{
     display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
+    grid-template-columns:repeat(3,1fr);
     gap:20px;
-
     margin-top:60px;
 }
 
 .card{
-    background:
-        rgba(255,255,255,.7);
-
-    padding:
-        35px
-        25px;
-
+    background:rgba(255,255,255,.7);
+    padding:35px 25px;
     border-radius:20px;
 
     text-align:center;
 
-    box-shadow:
-        0 20px 50px
-        rgba(100,30,60,.08);
+    box-shadow:0 20px 50px rgba(100,30,60,.08);
 
     transition:.3s;
 
-    border:
-        1px solid
-        rgba(255,255,255,.8);
+    border:1px solid rgba(255,255,255,.8);
 }
 
 .card:hover{
@@ -1013,19 +756,14 @@ section{
 
 .card h3{
     font-family:'DM Serif Display',serif;
-
     font-size:25px;
-
     margin-bottom:10px;
-
     color:#71384e;
 }
 
 .card p{
     font-size:14px;
-
     line-height:1.7;
-
     color:#80596a;
 }
 
@@ -1036,37 +774,24 @@ section{
 
 .timeline{
     max-width:800px;
-
-    margin:
-        70px auto 0;
-
+    margin:70px auto 0;
     position:relative;
 }
 
 .timeline:before{
     content:"";
-
     position:absolute;
-
     left:50%;
     top:0;
     bottom:0;
-
     width:2px;
-
     background:#f1aac4;
-
-    transform:
-        translateX(-50%);
+    transform:translateX(-50%);
 }
 
 .timeline-item{
     width:50%;
-
-    padding:
-        20px
-        40px;
-
+    padding:20px 40px;
     position:relative;
 }
 
@@ -1085,55 +810,40 @@ section{
     height:15px;
 
     background:#e96f9f;
-
-    border:
-        4px solid
-        #ffe8f0;
+    border:4px solid #ffe8f0;
 
     border-radius:50%;
 
     top:27px;
 }
 
-.timeline-item:nth-child(odd)
-.timeline-dot{
+.timeline-item:nth-child(odd) .timeline-dot{
     right:-7px;
 }
 
-.timeline-item:nth-child(even)
-.timeline-dot{
+.timeline-item:nth-child(even) .timeline-dot{
     left:-7px;
 }
 
 .timeline-date{
     font-size:11px;
-
     text-transform:uppercase;
-
     letter-spacing:2px;
-
     color:#d66a94;
-
     font-weight:800;
-
     margin-bottom:8px;
 }
 
 .timeline-item h3{
     font-family:'DM Serif Display',serif;
-
     font-size:27px;
-
     color:#71384e;
-
     margin-bottom:7px;
 }
 
 .timeline-item p{
     font-size:14px;
-
     line-height:1.7;
-
     color:#80596a;
 }
 
@@ -1146,9 +856,7 @@ section{
     min-height:85vh;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     text-align:center;
@@ -1156,25 +864,16 @@ section{
 
 .final-card{
     max-width:750px;
-
-    padding:
-        60px
-        30px;
+    padding:60px 30px;
 }
 
 .final-card .big-heart{
     font-size:75px;
-
-    animation:
-        heartbeat
-        1.4s
-        infinite;
-
+    animation:heartbeat 1.4s infinite;
     margin-bottom:25px;
 }
 
 @keyframes heartbeat{
-
     0%,100%{
         transform:scale(1);
     }
@@ -1190,45 +889,29 @@ section{
     60%{
         transform:scale(1.08);
     }
-
 }
 
 .final-card h2{
     font-family:'DM Serif Display',serif;
-
-    font-size:
-        clamp(
-            45px,
-            7vw,
-            80px
-        );
-
+    font-size:clamp(45px,7vw,80px);
     color:#71384e;
-
     margin-bottom:25px;
 }
 
 .final-card p{
     line-height:1.9;
-
     color:#80596a;
-
     max-width:550px;
-
-    margin:
-        auto auto 35px;
+    margin:auto auto 35px;
 }
 
 .surprise-button{
     border:none;
 
     background:#e96f9f;
-
     color:white;
 
-    padding:
-        16px
-        30px;
+    padding:16px 30px;
 
     border-radius:100px;
 
@@ -1236,17 +919,13 @@ section{
 
     cursor:pointer;
 
-    box-shadow:
-        0 15px 35px
-        rgba(210,80,130,.25);
+    box-shadow:0 15px 35px rgba(210,80,130,.25);
 
     transition:.3s;
 }
 
 .surprise-button:hover{
-    transform:
-        translateY(-4px)
-        scale(1.03);
+    transform:translateY(-4px) scale(1.03);
 }
 
 
@@ -1256,18 +935,14 @@ section{
 
 .modal{
     position:fixed;
-
     inset:0;
 
-    background:
-        rgba(80,25,50,.7);
-
+    background:rgba(80,25,50,.7);
     backdrop-filter:blur(12px);
 
     z-index:500;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
@@ -1279,7 +954,6 @@ section{
     transition:.5s;
 
     overflow-y:auto;
-
     -webkit-overflow-scrolling:touch;
 
     overscroll-behavior:contain;
@@ -1294,33 +968,21 @@ section{
     width:min(620px,100%);
 
     background:
-        linear-gradient(
-            145deg,
-            #fff8fb,
-            #ffe5ef
-        );
+        linear-gradient(145deg,#fff8fb,#ffe5ef);
 
-    padding:
-        55px
-        35px;
+    padding:55px 35px;
 
     border-radius:25px;
 
     text-align:center;
 
-    box-shadow:
-        0 30px 100px
-        rgba(30,10,20,.3);
+    box-shadow:0 30px 100px rgba(30,10,20,.3);
 
-    transform:
-        scale(.8)
-        translateY(30px);
+    transform:scale(.8) translateY(30px);
 
     transition:.5s;
 
-    max-height:
-        calc(100vh - 40px);
-
+    max-height:calc(100vh - 40px);
     overflow-y:auto;
 
     -webkit-overflow-scrolling:touch;
@@ -1328,10 +990,7 @@ section{
     overscroll-behavior:contain;
 
     scrollbar-width:thin;
-
-    scrollbar-color:
-        #e9a0bd
-        transparent;
+    scrollbar-color:#e9a0bd transparent;
 
     position:relative;
 }
@@ -1350,38 +1009,29 @@ section{
 }
 
 .modal.show .modal-box{
-    transform:
-        scale(1)
-        translateY(0);
+    transform:scale(1) translateY(0);
 }
 
 .modal-heart{
     font-size:65px;
-
     margin-bottom:10px;
 }
 
 .modal-flowers{
     font-size:22px;
-
     letter-spacing:7px;
-
     margin-bottom:20px;
 }
 
 .modal h2{
     font-family:'DM Serif Display',serif;
-
     font-size:50px;
-
     color:#71384e;
-
     margin-bottom:20px;
 }
 
 .modal p{
     line-height:1.9;
-
     color:#80596a;
 }
 
@@ -1391,68 +1041,47 @@ section{
 
 .modal-poem{
     font-family:'DM Serif Display',serif;
-
     font-size:19px;
-
     color:#8b5068;
-
     line-height:1.9;
 }
 
 .modal-name{
     font-family:'DM Serif Display',serif;
-
     font-size:27px;
-
     color:#c04f7e;
-
     margin-top:20px;
 }
 
 .modal-signature{
     margin-top:30px;
-
     font-family:'DM Serif Display',serif;
-
     font-size:28px;
-
     color:#c45280;
 }
 
 .modal-signature small{
     display:block;
-
     font-family:'Manrope',sans-serif;
-
     font-size:11px;
-
     letter-spacing:3px;
-
     text-transform:uppercase;
-
     color:#a16b81;
-
     margin-bottom:6px;
 }
 
 .modal-ornament{
     margin-top:20px;
-
     font-size:23px;
-
     letter-spacing:8px;
 }
 
 .close-modal{
     margin-top:30px;
 
-    padding:
-        12px
-        25px;
+    padding:12px 25px;
 
-    border:
-        1px solid
-        #e96f9f;
+    border:1px solid #e96f9f;
 
     background:transparent;
 
@@ -1489,27 +1118,18 @@ section{
 
     pointer-events:none;
 
-    animation:
-        confettiFall
-        linear
-        forwards;
+    animation:confettiFall linear forwards;
 }
 
 @keyframes confettiFall{
 
     0%{
-        transform:
-            translateY(0)
-            rotate(0);
-
+        transform:translateY(0) rotate(0);
         opacity:1;
     }
 
     100%{
-        transform:
-            translateY(110vh)
-            rotate(720deg);
-
+        transform:translateY(110vh) rotate(720deg);
         opacity:0;
     }
 
@@ -1522,27 +1142,18 @@ section{
 
 .burst-heart{
     position:fixed;
-
     z-index:900;
-
     pointer-events:none;
 
     font-size:22px;
 
-    animation:
-        burst
-        1.8s
-        ease-out
-        forwards;
+    animation:burst 1.8s ease-out forwards;
 }
 
 @keyframes burst{
 
     0%{
-        transform:
-            translate(0,0)
-            scale(.5);
-
+        transform:translate(0,0) scale(.5);
         opacity:1;
     }
 
@@ -1567,14 +1178,9 @@ section{
 
 footer{
     text-align:center;
-
-    padding:
-        40px
-        20px
-        70px;
+    padding:40px 20px 70px;
 
     font-size:12px;
-
     color:#b47b91;
 }
 
@@ -1584,6 +1190,57 @@ footer{
 ========================================================= */
 
 @media(max-width:768px){
+
+    .envelope{
+        width:220px;
+        height:155px;
+    }
+
+    .envelope-flap{
+        border-left-width:110px;
+        border-right-width:110px;
+        border-top-width:82px;
+    }
+
+    .envelope-letter{
+        width:182px;
+        height:116px;
+        left:19px;
+        top:14px;
+        padding:22px 14px 16px;
+        font-size:21px;
+    }
+
+    .envelope.open .envelope-letter{
+        top:-92px;
+        height:190px;
+        padding-top:28px;
+    }
+
+
+    .envelope{
+        width:220px;
+        height:150px;
+    }
+
+    .envelope-flap{
+        border-left-width:110px;
+        border-right-width:110px;
+        border-top-width:82px;
+    }
+
+    .envelope-letter{
+        width:182px;
+        height:190px;
+        left:19px;
+        top:18px;
+        padding:28px 14px 18px;
+        font-size:21px;
+    }
+
+    .envelope.open .envelope-letter{
+        top:-100px;
+    }
 
     .music-player{
         right:10px;
@@ -1596,9 +1253,7 @@ footer{
     }
 
     section{
-        padding:
-            80px
-            18px;
+        padding:80px 18px;
     }
 
     .hero{
@@ -1606,12 +1261,7 @@ footer{
     }
 
     .hero h1{
-        font-size:
-            clamp(
-                55px,
-                17vw,
-                90px
-            );
+        font-size:clamp(55px,17vw,90px);
     }
 
     .hero-subtitle{
@@ -1622,67 +1272,8 @@ footer{
         font-size:27px;
     }
 
-
-    /* =====================================
-       MOBILE ENVELOPE
-    ===================================== */
-
-    .opening-content{
-        padding:
-            20px
-            16px;
-    }
-
-    .opening-small{
-        font-size:10px;
-
-        letter-spacing:3px;
-
-        line-height:1.7;
-
-        margin-bottom:35px;
-    }
-
-    .envelope{
-        width:220px;
-        height:150px;
-
-        margin-bottom:35px;
-    }
-
-    .envelope-flap{
-        border-left-width:110px;
-        border-right-width:110px;
-        border-top-width:80px;
-    }
-
-    .envelope-letter{
-        width:164px;
-        height:108px;
-
-        left:28px;
-        top:25px;
-
-        font-size:19px;
-    }
-
-    .envelope.open .envelope-letter{
-        top:-72px;
-    }
-
-    .open-button{
-        font-size:13px;
-
-        padding:
-            13px
-            22px;
-    }
-
-
     .letter{
-        padding:
-            35px
-            23px;
+        padding:35px 23px;
     }
 
     .letter p{
@@ -1691,11 +1282,8 @@ footer{
 
     .gallery{
         grid-template-columns:1fr;
-
         gap:40px;
-
         max-width:400px;
-
         margin-left:auto;
         margin-right:auto;
     }
@@ -1711,13 +1299,9 @@ footer{
     .timeline-item,
     .timeline-item:nth-child(even){
         width:100%;
-
         margin-left:0;
-
         padding-left:40px;
-
         padding-right:5px;
-
         text-align:left;
     }
 
@@ -1725,28 +1309,20 @@ footer{
         text-align:left;
     }
 
-    .timeline-item:nth-child(odd)
-    .timeline-dot,
-    .timeline-item:nth-child(even)
-    .timeline-dot{
+    .timeline-item:nth-child(odd) .timeline-dot,
+    .timeline-item:nth-child(even) .timeline-dot{
         left:3px;
         right:auto;
     }
 
     .modal{
         align-items:flex-start;
-
         padding:20px;
     }
 
     .modal-box{
-        padding:
-            40px
-            22px;
-
-        max-height:
-            calc(100vh - 40px);
-
+        padding:40px 22px;
+        max-height:calc(100vh - 40px);
         margin:auto 0;
     }
 
@@ -1756,46 +1332,11 @@ footer{
 
     .modal p{
         font-size:14px;
-
         line-height:1.85;
     }
 
     .modal-poem{
         font-size:17px;
-    }
-
-}
-
-
-/* =========================================================
-   EXTRA SMALL PHONE
-========================================================= */
-
-@media(max-width:380px){
-
-    .envelope{
-        width:205px;
-        height:140px;
-    }
-
-    .envelope-flap{
-        border-left-width:102.5px;
-        border-right-width:102.5px;
-        border-top-width:75px;
-    }
-
-    .envelope-letter{
-        width:150px;
-        height:100px;
-
-        left:27.5px;
-        top:23px;
-
-        font-size:17px;
-    }
-
-    .envelope.open .envelope-letter{
-        top:-68px;
     }
 
 }
@@ -1811,11 +1352,8 @@ footer{
     *::before,
     *::after{
         animation-duration:.01ms !important;
-
         animation-iteration-count:1 !important;
-
         scroll-behavior:auto !important;
-
         transition-duration:.01ms !important;
     }
 
@@ -1827,11 +1365,6 @@ footer{
 
 <body>
 
-
-<!-- =====================================================
-     MUSIK
-===================================================== -->
-
 <audio
     id="bgMusic"
     src="ultah/sertamulia.mp3"
@@ -1841,7 +1374,7 @@ footer{
 
 
 <!-- =====================================================
-     BACKGROUND
+     LATAR
 ===================================================== -->
 
 <div class="background-glow">
@@ -1856,7 +1389,7 @@ footer{
 
 
 <!-- =====================================================
-     MUSIC PLAYER
+     PEMUTAR MUSIK
 ===================================================== -->
 
 <div class="music-player">
@@ -1920,9 +1453,7 @@ footer{
             <div class="envelope-body"></div>
 
             <div class="envelope-letter">
-
                 Untuk Ratu Hatiku 👑
-
             </div>
 
             <div class="envelope-flap"></div>
@@ -1956,8 +1487,11 @@ footer{
         </div>
 
         <div class="hero-badge">
+
             ✦ 13 September 2026 ✦
+
         </div>
+
 
         <h1>
 
@@ -1969,17 +1503,20 @@ footer{
 
         </h1>
 
+
         <div class="hero-name">
 
             Khanza Elma Mazaya 🌷
 
         </div>
 
+
         <div class="flower-decoration">
 
             🌸 🌷 🌹 💐 🌷 🌸
 
         </div>
+
 
         <p class="hero-subtitle">
 
@@ -1998,6 +1535,7 @@ footer{
             yang begitu berarti di hidupku. 💗👑
 
         </p>
+
 
         <div class="scroll-hint">
 
@@ -2024,17 +1562,20 @@ footer{
 
         </div>
 
+
         <h2 class="section-title">
 
             Salah satu pemandangan favoritku
 
         </h2>
 
+
         <div class="flower-line">
 
             ❀ ♡ ❀
 
         </div>
+
 
         <p class="section-description">
 
@@ -2052,6 +1593,7 @@ footer{
             yang berbeda di hatiku. 🌸
 
         </p>
+
 
         <div class="main-photo">
 
@@ -2080,11 +1622,13 @@ footer{
 
         </div>
 
+
         <h2 class="section-title">
 
             Sebuah surat untuk ratuku
 
         </h2>
+
 
         <div class="flower-line">
 
@@ -2092,9 +1636,11 @@ footer{
 
         </div>
 
+
         <div class="letter-wrap">
 
             <div class="letter">
+
 
                 <p>
 
@@ -2111,6 +1657,7 @@ footer{
                     denganku.
 
                 </p>
+
 
                 <p>
 
@@ -2131,6 +1678,7 @@ footer{
 
                 </p>
 
+
                 <p>
 
                     Terima kasih sudah hadir.
@@ -2149,6 +1697,7 @@ footer{
                     kenangan yang ingin kusimpan baik-baik.
 
                 </p>
+
 
                 <p>
 
@@ -2176,6 +1725,7 @@ footer{
 
                 </p>
 
+
                 <p>
 
                     Aku ingin kamu terus bertumbuh.
@@ -2191,6 +1741,7 @@ footer{
                     sampai sejauh ini.
 
                 </p>
+
 
                 <p>
 
@@ -2209,6 +1760,7 @@ footer{
                     hal-hal baik untukmu.
 
                 </p>
+
 
                 <p>
 
@@ -2230,6 +1782,7 @@ footer{
                     sambil tersenyum.
 
                 </p>
+
 
                 <p>
 
@@ -2253,6 +1806,7 @@ footer{
                     alasan baru untuk tersenyum.
 
                 </p>
+
 
                 <p>
 
@@ -2281,11 +1835,13 @@ footer{
 
                 </p>
 
+
                 <div class="flower-line">
 
                     🌸 ❀ 🌷 ❀ 🌹
 
                 </div>
+
 
                 <div class="signature">
 
@@ -2317,17 +1873,20 @@ footer{
 
         </div>
 
+
         <h2 class="section-title">
 
             Hal-hal yang membuatmu istimewa
 
         </h2>
 
+
         <div class="flower-line">
 
             🌷 ♡ 🌷 ♡ 🌷
 
         </div>
+
 
         <p class="section-description">
 
@@ -2343,7 +1902,9 @@ footer{
 
         </p>
 
+
         <div class="gallery">
+
 
             <div class="polaroid">
 
@@ -2352,10 +1913,13 @@ footer{
                     alt="Senyum Khanza">
 
                 <p>
+
                     Senyummu 🌷
+
                 </p>
 
             </div>
+
 
             <div class="polaroid">
 
@@ -2364,10 +1928,13 @@ footer{
                     alt="Khanza yang penuh semangat">
 
                 <p>
+
                     Semangatmu ✨
+
                 </p>
 
             </div>
+
 
             <div class="polaroid">
 
@@ -2376,10 +1943,13 @@ footer{
                     alt="Khanza yang istimewa">
 
                 <p>
+
                     Kamu, apa adanya 👑
+
                 </p>
 
             </div>
+
 
         </div>
 
@@ -2402,11 +1972,13 @@ footer{
 
         </div>
 
+
         <h2 class="section-title">
 
             Tiga hal untuk ratuku
 
         </h2>
+
 
         <div class="flower-line">
 
@@ -2414,7 +1986,9 @@ footer{
 
         </div>
 
+
         <div class="cards">
+
 
             <div class="card">
 
@@ -2423,7 +1997,9 @@ footer{
                 </div>
 
                 <h3>
+
                     Kamu sangat berarti
+
                 </h3>
 
                 <p>
@@ -2440,6 +2016,7 @@ footer{
 
             </div>
 
+
             <div class="card">
 
                 <div class="card-icon">
@@ -2447,7 +2024,9 @@ footer{
                 </div>
 
                 <h3>
+
                     Kamu adalah ratuku
+
                 </h3>
 
                 <p>
@@ -2463,6 +2042,7 @@ footer{
 
             </div>
 
+
             <div class="card">
 
                 <div class="card-icon">
@@ -2470,7 +2050,9 @@ footer{
                 </div>
 
                 <h3>
+
                     Tetaplah menjadi Khanza
+
                 </h3>
 
                 <p>
@@ -2486,6 +2068,7 @@ footer{
                 </p>
 
             </div>
+
 
         </div>
 
@@ -2508,11 +2091,13 @@ footer{
 
         </div>
 
+
         <h2 class="section-title">
 
             Momen yang ingin kuingat
 
         </h2>
+
 
         <div class="flower-line">
 
@@ -2520,18 +2105,24 @@ footer{
 
         </div>
 
+
         <div class="timeline">
+
 
             <div class="timeline-item">
 
                 <div class="timeline-dot"></div>
 
                 <div class="timeline-date">
+
                     Bab 01
+
                 </div>
 
                 <h3>
+
                     Awal dari semuanya
+
                 </h3>
 
                 <p>
@@ -2548,16 +2139,21 @@ footer{
 
             </div>
 
+
             <div class="timeline-item">
 
                 <div class="timeline-dot"></div>
 
                 <div class="timeline-date">
+
                     Bab 02
+
                 </div>
 
                 <h3>
+
                     Momen-momen sederhana
+
                 </h3>
 
                 <p>
@@ -2577,16 +2173,21 @@ footer{
 
             </div>
 
+
             <div class="timeline-item">
 
                 <div class="timeline-dot"></div>
 
                 <div class="timeline-date">
+
                     Bab 03
+
                 </div>
 
                 <h3>
+
                     Hari ini 🌷
+
                 </h3>
 
                 <p>
@@ -2604,16 +2205,21 @@ footer{
 
             </div>
 
+
             <div class="timeline-item">
 
                 <div class="timeline-dot"></div>
 
                 <div class="timeline-date">
+
                     Bab 04
+
                 </div>
 
                 <h3>
+
                     Bersambung... 💗
+
                 </h3>
 
                 <p>
@@ -2632,6 +2238,7 @@ footer{
 
             </div>
 
+
         </div>
 
     </div>
@@ -2648,8 +2255,11 @@ footer{
     <div class="final-card">
 
         <div class="big-heart">
+
             💗
+
         </div>
+
 
         <div class="flower-decoration">
 
@@ -2657,11 +2267,13 @@ footer{
 
         </div>
 
+
         <h2>
 
             Satu hal terakhir...
 
         </h2>
+
 
         <p>
 
@@ -2671,8 +2283,10 @@ footer{
             <br><br>
 
             <strong>
+
                 untuk mengingatkanmu
                 betapa berharganya dirimu.
+
             </strong>
 
             <br><br>
@@ -2686,10 +2300,13 @@ footer{
             <br><br>
 
             <em>
+
                 "Ternyata hidup seindah ini." 🌷
+
             </em>
 
         </p>
+
 
         <button
             id="surpriseButton"
@@ -2717,9 +2334,13 @@ footer{
 
     <div class="modal-box">
 
+
         <div class="modal-heart">
+
             💗
+
         </div>
+
 
         <div class="modal-flowers">
 
@@ -2727,11 +2348,13 @@ footer{
 
         </div>
 
+
         <h2 id="modalTitle">
 
             Selamat Ulang Tahun, Istriku 💗
 
         </h2>
+
 
         <div class="modal-name">
 
@@ -2739,11 +2362,13 @@ footer{
 
         </div>
 
+
         <div class="flower-line">
 
             ❀ ♡ ❀ ♡ ❀
 
         </div>
+
 
         <p>
 
@@ -2763,7 +2388,9 @@ footer{
             <br><br>
 
             <strong>
+
                 doa yang baik untukmu.
+
             </strong>
 
             <br><br>
@@ -2793,8 +2420,10 @@ footer{
             <br><br>
 
             <strong>
+
                 keberadaanmu adalah sesuatu
                 yang sangat layak untuk disyukuri. 🫶
+
             </strong>
 
             <br><br>
@@ -2838,17 +2467,21 @@ footer{
             <br><br>
 
             <strong>
+
                 kamu akan selalu menjadi
                 seseorang yang sangat berarti.
+
             </strong>
 
         </p>
+
 
         <div class="flower-line">
 
             🌸 🌷 🌹 💐 🌹 🌷 🌸
 
         </div>
+
 
         <p class="modal-poem">
 
@@ -2878,11 +2511,13 @@ footer{
 
         </p>
 
+
         <div class="flower-line">
 
             ❀ ─── 💗 ─── ❀
 
         </div>
+
 
         <p>
 
@@ -2891,7 +2526,9 @@ footer{
             <br><br>
 
             <strong>
+
                 Selamat ulang tahun, istriku.
+
             </strong>
 
             <br><br>
@@ -2927,15 +2564,20 @@ footer{
             <br><br>
 
             <strong>
+
                 kamu adalah ratuku. 👑🌷
+
             </strong>
 
         </p>
 
+
         <div class="modal-signature">
 
             <small>
+
                 dengan cinta dan doa yang tulus
+
             </small>
 
             Dari Suamimu,
@@ -2946,11 +2588,13 @@ footer{
 
         </div>
 
+
         <div class="modal-ornament">
 
             🌹 🌸 🌷 💗 🌷 🌸 🌹
 
         </div>
+
 
         <button
             id="closeModal"
@@ -2959,6 +2603,7 @@ footer{
             Simpan pesan kecil ini 🤍
 
         </button>
+
 
     </div>
 
@@ -2982,59 +2627,191 @@ footer{
 <script>
 
 /* =========================================================
+   PEMILIH ELEMEN
+========================================================= */
+
+const $ = (selector) =>
+    document.querySelector(selector);
+
+
+/* =========================================================
    ELEMENT
 ========================================================= */
 
 const opening =
-    document.getElementById("opening");
+    $("#opening");
 
 const envelope =
-    document.getElementById("envelope");
+    $("#envelope");
 
 const openButton =
-    document.getElementById("openButton");
+    $("#openButton");
 
 const musicButton =
-    document.getElementById("musicButton");
+    $("#musicButton");
 
 const musicStatus =
-    document.getElementById("musicStatus");
+    $("#musicStatus");
 
 const volumeControl =
-    document.getElementById("volumeControl");
+    $("#volumeControl");
+
+const surpriseButton =
+    $("#surpriseButton");
+
+const surpriseModal =
+    $("#surpriseModal");
+
+const closeModal =
+    $("#closeModal");
+
+const floatingHearts =
+    $("#floating-hearts");
+
+
+/* =========================================================
+   MUSIK UTAMA — MP3 LOKAL
+   File: ultah/sertamulia.mp3
+
+   Web Audio API tetap dipakai untuk efek chime kecil.
+   Musik utama TIDAK autoplay.
+========================================================= */
 
 const bgMusic =
     document.getElementById("bgMusic");
 
-const surpriseButton =
-    document.getElementById("surpriseButton");
-
-const surpriseModal =
-    document.getElementById("surpriseModal");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-const floatingHearts =
-    document.getElementById("floating-hearts");
-
-
-/* =========================================================
-   MUSIK MP3
-   TIDAK AUTOPLAY
-========================================================= */
-
 let musicPlaying = false;
 
-bgMusic.volume =
-    Number(volumeControl.value);
+
+/* =========================================================
+   WEB AUDIO — UNTUK EFEK CHIME SAJA
+========================================================= */
+
+let audioContext = null;
+let masterGain = null;
+
+function createAudio(){
+
+    if(audioContext)
+        return;
+
+    const AudioContext =
+        window.AudioContext ||
+        window.webkitAudioContext;
+
+    if(!AudioContext)
+        return;
+
+    audioContext =
+        new AudioContext();
+
+    masterGain =
+        audioContext.createGain();
+
+    masterGain.gain.value =
+        Number(volumeControl.value);
+
+    masterGain.connect(
+        audioContext.destination
+    );
+
+}
 
 
 /* =========================================================
-   PLAY MUSIK
+   MEMUTAR NADA — EFEK CHIME
+========================================================= */
+
+function playNote(
+    frequency,
+    startTime,
+    duration,
+    volume = .04,
+    type = "sine"
+){
+
+    if(!audioContext || !masterGain)
+        return;
+
+    const oscillator =
+        audioContext.createOscillator();
+
+    const gain =
+        audioContext.createGain();
+
+    oscillator.type =
+        type;
+
+    oscillator.frequency.setValueAtTime(
+        frequency,
+        startTime
+    );
+
+    gain.gain.setValueAtTime(
+        0,
+        startTime
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        volume,
+        startTime + .04
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        startTime + duration
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(masterGain);
+
+    oscillator.start(startTime);
+
+    oscillator.stop(
+        startTime +
+        duration +
+        .05
+    );
+
+}
+
+
+/* =========================================================
+   FREKUENSI NADA — EFEK CHIME
+========================================================= */
+
+const notes = {
+
+    C4:261.63,
+    D4:293.66,
+    E4:329.63,
+    F4:349.23,
+    G4:392.00,
+    A4:440.00,
+    B4:493.88,
+
+    C5:523.25,
+    D5:587.33,
+    E5:659.25,
+    F5:698.46,
+    G5:783.99,
+    A5:880.00,
+
+    G5:783.99
+
+};
+
+
+/* =========================================================
+   MEMULAI MUSIK MP3
+   Dipanggil HANYA dari tombol Play.
 ========================================================= */
 
 async function startMusic(){
+
+    if(!bgMusic)
+        return;
 
     bgMusic.volume =
         Number(volumeControl.value);
@@ -3043,7 +2820,8 @@ async function startMusic(){
 
         await bgMusic.play();
 
-        musicPlaying = true;
+        musicPlaying =
+            true;
 
         musicButton.textContent =
             "❚❚";
@@ -3059,17 +2837,18 @@ async function startMusic(){
     }catch(error){
 
         console.log(
-            "Musik belum dapat diputar:",
+            "MP3 belum dapat diputar:",
             error
         );
 
-        musicPlaying = false;
+        musicPlaying =
+            false;
 
         musicButton.textContent =
             "▶";
 
         musicStatus.textContent =
-            "Tekan ▶ untuk memutar";
+            "Tekan tombol ▶ untuk memutar";
 
     }
 
@@ -3077,14 +2856,18 @@ async function startMusic(){
 
 
 /* =========================================================
-   PAUSE MUSIK
+   MENGHENTIKAN MUSIK MP3
 ========================================================= */
 
 function stopMusic(){
 
+    if(!bgMusic)
+        return;
+
     bgMusic.pause();
 
-    musicPlaying = false;
+    musicPlaying =
+        false;
 
     musicButton.textContent =
         "▶";
@@ -3101,12 +2884,12 @@ function stopMusic(){
 
 
 /* =========================================================
-   BUTTON PLAY / PAUSE
+   TOMBOL PLAY / PAUSE
 ========================================================= */
 
 musicButton.addEventListener(
     "click",
-    async function(){
+    async () => {
 
         if(musicPlaying){
 
@@ -3123,58 +2906,55 @@ musicButton.addEventListener(
 
 
 /* =========================================================
-   VOLUME
+   VOLUME MP3
 ========================================================= */
 
 volumeControl.addEventListener(
     "input",
-    function(){
+    () => {
 
-        bgMusic.volume =
+        const volume =
             Number(
                 volumeControl.value
             );
 
-    }
-);
+        if(bgMusic){
 
+            bgMusic.volume =
+                volume;
 
-/* =========================================================
-   SAAT AUDIO ERROR
-========================================================= */
+        }
 
-bgMusic.addEventListener(
-    "error",
-    function(){
+        if(masterGain){
 
-        musicPlaying = false;
+            masterGain.gain.value =
+                volume;
 
-        musicButton.textContent =
-            "▶";
-
-        musicStatus.textContent =
-            "File musik tidak ditemukan";
-
-        console.log(
-            "Pastikan file berada di: ultah/sertamulia.mp3"
-        );
+        }
 
     }
 );
 
 
 /* =========================================================
-   AUDIO SELESAI
+   JIKA LAGU SELESAI
+   loop=true juga dipasang di <audio>.
 ========================================================= */
 
 bgMusic.addEventListener(
     "ended",
-    function(){
+    () => {
 
-        musicPlaying = false;
+        musicPlaying =
+            false;
 
         musicButton.textContent =
             "▶";
+
+        musicButton.setAttribute(
+            "aria-label",
+            "Putar musik"
+        );
 
         musicStatus.textContent =
             "Musik selesai";
@@ -3182,145 +2962,96 @@ bgMusic.addEventListener(
     }
 );
 
-
 /* =========================================================
-   EFEK CHIME
-   HANYA SAAT USER MENEKAN TOMBOL
+   EFEK SUARA
 ========================================================= */
-
-let audioContext = null;
 
 function playChime(){
 
-    try{
+    createAudio();
 
-        const AudioContext =
-            window.AudioContext ||
-            window.webkitAudioContext;
+    if(!audioContext)
+        return;
 
-        if(!AudioContext)
-            return;
 
-        if(!audioContext){
+    if(
+        audioContext.state ===
+        "suspended"
+    ){
 
-            audioContext =
-                new AudioContext();
-
-        }
-
-        if(
-            audioContext.state ===
-            "suspended"
-        ){
-
-            audioContext.resume()
-                .catch(
-                    () => {}
-                );
-
-        }
-
-        const now =
-            audioContext.currentTime;
-
-        const frequencies = [
-            523.25,
-            659.25,
-            783.99
-        ];
-
-        frequencies.forEach(
-            function(freq,index){
-
-                const oscillator =
-                    audioContext
-                        .createOscillator();
-
-                const gain =
-                    audioContext
-                        .createGain();
-
-                oscillator.type =
-                    "sine";
-
-                oscillator.frequency.value =
-                    freq;
-
-                const start =
-                    now +
-                    index * .12;
-
-                gain.gain.setValueAtTime(
-                    0,
-                    start
-                );
-
-                gain.gain.linearRampToValueAtTime(
-                    .06,
-                    start + .04
-                );
-
-                gain.gain.exponentialRampToValueAtTime(
-                    .001,
-                    start + .65
-                );
-
-                oscillator.connect(gain);
-
-                gain.connect(
-                    audioContext.destination
-                );
-
-                oscillator.start(start);
-
-                oscillator.stop(
-                    start + .7
-                );
-
-            }
-        );
-
-    }catch(error){
-
-        console.log(
-            "Chime tidak tersedia:",
-            error
-        );
+        audioContext.resume()
+            .catch(() => {});
 
     }
+
+
+    const now =
+        audioContext.currentTime;
+
+
+    playNote(
+        notes.C5,
+        now,
+        .5,
+        .07,
+        "sine"
+    );
+
+
+    playNote(
+        notes.E5,
+        now + .12,
+        .5,
+        .06,
+        "sine"
+    );
+
+
+    playNote(
+        notes.G5,
+        now + .24,
+        .8,
+        .05,
+        "sine"
+    );
 
 }
 
 
 /* =========================================================
-   BUKA AMPLOP
-   PENTING:
-   TIDAK MEMULAI MUSIK
+   MEMBUKA AMPLOP
 ========================================================= */
 
-let websiteOpened = false;
+let websiteOpened =
+    false;
+
 
 function openEnvelope(){
 
     if(websiteOpened)
         return;
 
-    websiteOpened = true;
+
+    websiteOpened =
+        true;
+
 
     envelope.classList.add(
         "open"
     );
 
-    /*
-       Chime hanya efek suara kecil.
-       Musik MP3 TIDAK dimainkan di sini.
-    */
 
     playChime();
 
+    /*
+       Musik dijalankan tanpa membuat
+       animasi pembukaan menunggu audio.
+    */
+
+
 
     setTimeout(
-        function(){
+        () => {
 
             opening.classList.add(
                 "hide"
@@ -3330,7 +3061,7 @@ function openEnvelope(){
                 "hidden";
 
         },
-        1100
+        1150
     );
 
 }
@@ -3349,7 +3080,7 @@ envelope.addEventListener(
 
 
 /* =========================================================
-   FLOATING HEARTS
+   HATI & BUNGA MELAYANG
 ========================================================= */
 
 function createFloatingHeart(){
@@ -3357,15 +3088,19 @@ function createFloatingHeart(){
     if(!floatingHearts)
         return;
 
+
     const heart =
         document.createElement(
             "div"
         );
 
+
     heart.className =
         "float-heart";
 
+
     const hearts = [
+
         "♡",
         "♥",
         "💕",
@@ -3374,7 +3109,9 @@ function createFloatingHeart(){
         "🌷",
         "🌹",
         "✦"
+
     ];
+
 
     heart.textContent =
         hearts[
@@ -3384,10 +3121,12 @@ function createFloatingHeart(){
             )
         ];
 
+
     heart.style.left =
         Math.random() *
         100 +
         "%";
+
 
     heart.style.fontSize =
         (
@@ -3397,6 +3136,7 @@ function createFloatingHeart(){
         ) +
         "px";
 
+
     heart.style.animationDuration =
         (
             7 +
@@ -3405,16 +3145,14 @@ function createFloatingHeart(){
         ) +
         "s";
 
+
     floatingHearts.appendChild(
         heart
     );
 
+
     setTimeout(
-        function(){
-
-            heart.remove();
-
-        },
+        () => heart.remove(),
         16000
     );
 
@@ -3428,19 +3166,22 @@ setInterval(
 
 
 /* =========================================================
-   CONFETTI
+   KONFETI
 ========================================================= */
 
 function createConfetti(){
 
     const symbols = [
+
         "✦",
         "♥",
         "♡",
         "✧",
         "🌸",
         "🌷"
+
     ];
+
 
     for(
         let i = 0;
@@ -3453,8 +3194,10 @@ function createConfetti(){
                 "div"
             );
 
+
         piece.className =
             "confetti";
+
 
         piece.textContent =
             symbols[
@@ -3464,10 +3207,12 @@ function createConfetti(){
                 )
             ];
 
+
         piece.style.left =
             Math.random() *
             100 +
             "%";
+
 
         piece.style.fontSize =
             (
@@ -3477,6 +3222,7 @@ function createConfetti(){
             ) +
             "px";
 
+
         piece.style.animationDuration =
             (
                 2 +
@@ -3485,21 +3231,20 @@ function createConfetti(){
             ) +
             "s";
 
+
         piece.style.animationDelay =
             Math.random() *
             .7 +
             "s";
 
+
         document.body.appendChild(
             piece
         );
 
+
         setTimeout(
-            function(){
-
-                piece.remove();
-
-            },
+            () => piece.remove(),
             5500
         );
 
@@ -3509,7 +3254,7 @@ function createConfetti(){
 
 
 /* =========================================================
-   HEART EXPLOSION
+   LEDAKAN HATI
 ========================================================= */
 
 function heartExplosion(){
@@ -3519,6 +3264,7 @@ function heartExplosion(){
 
     const centerY =
         window.innerHeight / 2;
+
 
     for(
         let i = 0;
@@ -3531,8 +3277,10 @@ function heartExplosion(){
                 "div"
             );
 
+
         heart.className =
             "burst-heart";
+
 
         const symbols = [
             "💗",
@@ -3542,6 +3290,7 @@ function heartExplosion(){
             "💐"
         ];
 
+
         heart.textContent =
             symbols[
                 Math.floor(
@@ -3550,23 +3299,28 @@ function heartExplosion(){
                 )
             ];
 
+
         heart.style.left =
             centerX +
             "px";
 
+
         heart.style.top =
             centerY +
             "px";
+
 
         const angle =
             Math.random() *
             Math.PI *
             2;
 
+
         const distance =
             100 +
             Math.random() *
             350;
+
 
         heart.style.setProperty(
             "--x",
@@ -3575,6 +3329,7 @@ function heartExplosion(){
             "px"
         );
 
+
         heart.style.setProperty(
             "--y",
             Math.sin(angle) *
@@ -3582,16 +3337,14 @@ function heartExplosion(){
             "px"
         );
 
+
         document.body.appendChild(
             heart
         );
 
+
         setTimeout(
-            function(){
-
-                heart.remove();
-
-            },
+            () => heart.remove(),
             2000
         );
 
@@ -3631,12 +3384,17 @@ function hideModal(){
 
 
 /* =========================================================
-   SURPRISE
+   KEJUTAN TERAKHIR
 ========================================================= */
 
 surpriseButton.addEventListener(
     "click",
-    function(){
+    () => {
+
+        /*
+           Modal langsung dibuka.
+           Tidak menunggu proses musik.
+        */
 
         showModal();
 
@@ -3646,27 +3404,32 @@ surpriseButton.addEventListener(
 
         heartExplosion();
 
+
     }
 );
 
 
 /* =========================================================
-   CLOSE MODAL
+   MENUTUP MODAL
 ========================================================= */
 
 closeModal.addEventListener(
     "click",
-    hideModal
+    () => {
+
+        hideModal();
+
+    }
 );
 
 
 /* =========================================================
-   CLICK OUTSIDE MODAL
+   KLIK DI LUAR MODAL
 ========================================================= */
 
 surpriseModal.addEventListener(
     "click",
-    function(event){
+    (event) => {
 
         if(
             event.target ===
@@ -3682,12 +3445,12 @@ surpriseModal.addEventListener(
 
 
 /* =========================================================
-   ESC
+   TOMBOL ESC
 ========================================================= */
 
 document.addEventListener(
     "keydown",
-    function(event){
+    (event) => {
 
         if(
             event.key ===
